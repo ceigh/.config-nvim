@@ -133,3 +133,14 @@ lspconfig.stylelint_lsp.setup {
     },
   },
 }
+
+lspconfig.gopls.setup {
+  capabilities = capabilities,
+  on_attach = function()
+    on_attach()
+    create_format_on_save_au(
+      "gopls",
+      { "*.go" }
+    )
+  end,
+}
