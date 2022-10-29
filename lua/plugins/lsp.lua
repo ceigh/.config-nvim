@@ -112,7 +112,7 @@ lspconfig.eslint.setup {
       function() vim.cmd "EslintFixAll" end
     )
   end,
-  filetypes = { "javascript", "typescript", "vue", "json" },
+  filetypes = { "javascript", "typescript", "vue" },
 }
 
 lspconfig.stylelint_lsp.setup {
