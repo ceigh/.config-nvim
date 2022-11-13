@@ -72,4 +72,9 @@ return require("packer").startup(function(use)
       "dcampos/cmp-snippy",
     },
   }
+
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
 end)
