@@ -80,6 +80,17 @@ lspconfig.volar.setup {
   },
 }
 
+-- for completions
+lspconfig.cssls.setup {
+  capabilities = capabilities,
+  filetypes = { "css", "scss" },
+  settings = {
+    -- validation via stylelint
+    css = { validate = false },
+    scss = { validate = false }
+  }
+}
+
 lspconfig.sumneko_lua.setup {
   capabilities = capabilities,
   on_attach = function()
