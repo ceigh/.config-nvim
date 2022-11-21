@@ -1,0 +1,145 @@
+# This snippet file enables vue files to use tabs for html, js and css. It also
+# includes some vue-specific html-like snippets, as well as some general
+# boilerplate code for vue.
+
+extends html, javascript, css
+
+# These snippets form a port of Sarah Drasner's vue-sublime-snippets
+
+# some html-like snippets
+
+# snippet slot
+# 	<slot></slot>
+
+# snippet template
+# 	<template></template>
+
+# snippet transition
+# 	<transition></transition>
+
+# The following snippets create more complex boilerplate code.
+
+snippet vbase
+	<script lang="ts">
+	import Vue from "vue"
+	
+	export default Vue.extend({})
+	</script>
+
+	<template>
+		<div>
+			${0}
+		</div>
+	</template>
+
+	<style module lang="scss">
+	//
+	</style>
+
+# snippet vcl
+# 	@click="${1}"
+
+# snippet vdata
+# 	data() {
+# 		return {
+# 			${1:key}: ${2:value}
+# 		};
+# 	},
+
+# snippet vmounted
+# 	mounted() {
+# 		console.log('mounted');
+# 	},
+
+# snippet vmethods
+# 	methods: {
+# 		${1:method}() {
+# 			console.log('method');
+# 		}
+# 	},
+
+# snippet vcomputed
+# 	computed: {
+# 		${1:fnName}() {
+# 			return;
+# 		}
+# 	},
+
+# snippet vfilter
+# 	filters: {
+# 		${1:fnName}: function(${2:value}) {
+# 			return;
+# 		}
+# 	},
+
+# snippet vfor
+# 	<div v-for="${1:item} in ${2:items}" :key="$1.id">
+# 		{{ $1 }}
+# 	</div>
+
+# snippet vgetters
+# 	getters: {
+# 		${1:value}: state => {
+# 			return state.$1;
+# 		}
+# 	},
+
+# snippet vimport
+# 	import ${1:New} from './components/$1.vue';
+
+# snippet vkeep
+# 	<keep-alive>
+# 		<component :is="">
+# 			<p>default</p>
+# 		</component>
+# 	</keep-alive>
+
+# snippet vmixin
+# 	const ${1:mixinName} = {
+# 		mounted() {
+# 			console.log('hello from mixin!')
+# 		},
+# 	}
+# 	const ${2:Component} = Vue.extend({
+# 		mixins: [$1]
+# 	})
+
+# snippet vmutations
+# 	mutations: {
+# 		${1:updateValue}(state, ${3:payload}) => {
+# 			state.${2:value} = $3;
+# 		}
+# 	},
+
+# snippet vprops:d
+# 	${1:propName}: {
+# 	  type: ${2:Number},
+# 	  default: ${0}
+# 	},
+
+# snippet vprops
+# 	${1:propName}: {
+# 		type: ${2:Number}
+# 	},
+
+# snippet vstore
+# 	import Vue from 'vue';
+# 	import Vuex from 'vuex';
+
+# 	Vue.use(Vuex);
+
+# 	export const store = new Vuex.Store({
+# 		state: {
+# 			${1:key}: ${2:value}
+# 		}
+# 	});
+
+# vue-i18n snippets https://github.com/kazupon/vue-i18n
+
+# snippet trans
+# 	$t('$1')
+
+# # Translation with parameter
+# snippet transc
+# 	$t('$1', { $2: $3 })
+
