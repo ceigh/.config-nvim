@@ -119,7 +119,7 @@ lspconfig.eslint.setup {
     create_format_on_save_au(
       "eslint",
       -- see ft below
-      { "*.js", "*.ts", "*.vue" },
+      { "*.js", "*.cjs", "*.ts", "*.vue" },
       function() vim.cmd "EslintFixAll" end
     )
   end,
