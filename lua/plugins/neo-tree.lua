@@ -23,6 +23,12 @@ require("neo-tree").setup {
       symbols = {
         added = "",
         modified = "",
+        deleted = "",
+        renamed = "",
+        untracked = "",
+        unstaged = "",
+        staged = "",
+        conflict = "",
         ignored = "^",
       }
     },

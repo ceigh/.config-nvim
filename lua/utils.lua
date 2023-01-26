@@ -9,4 +9,6 @@ function M.map_key(mode, key, result, opts)
   )
 end
 
+M.colorcolumn = "80"
+
 return M

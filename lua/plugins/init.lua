@@ -2,7 +2,13 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use "farmergreg/vim-lastplace"
   use "sheerun/vim-polyglot"
-  use "savq/melange"
+
+  use {
+    "savq/melange",
+    config = function()
+      vim.cmd("colorscheme melange")
+    end
+  }
 
   use {
     "norcalli/nvim-colorizer.lua",
@@ -52,10 +58,10 @@ return require("packer").startup(function(use)
     config = function() require("plugins/indent-blankline") end,
   }
 
-  use {
-    "lukas-reineke/virt-column.nvim",
-    config = function() require("plugins/virt-column") end,
-  }
+  -- use {
+  --   "lukas-reineke/virt-column.nvim",
+  --   config = function() require("plugins/virt-column") end,
+  -- }
 
   use {
     "neovim/nvim-lspconfig",
