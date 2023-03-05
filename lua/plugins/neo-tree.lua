@@ -10,15 +10,12 @@ require("neo-tree").setup {
     container = {
       enable_character_fade = false,
     },
-
     icon = {
       folder_closed = "+",
       folder_open = "-",
       folder_empty = "~",
     },
-
     modified = { symbol = "" },
-
     git_status = {
       symbols = {
         added = "",

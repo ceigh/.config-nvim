@@ -12,11 +12,11 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({
     -- ["<C-X>"] = cmp.mapping.complete(),
-    ["<C-z>"] = cmp.mapping.complete(),
-    ["<C-x>"] = cmp.mapping.abort(),
-    ["<Tab>"] = cmp.mapping.select_next_item(),
-    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-z>"] = cmp.mapping.complete(),
+        ["<C-x>"] = cmp.mapping.abort(),
+        ["<Tab>"] = cmp.mapping.select_next_item(),
+        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -30,11 +30,11 @@ cmp.setup({
 -- Appearance
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  virtual_text = false,
-  signs = true,
-  update_in_insert = true,
-}
+    underline = true,
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+  }
 )
 
 -- Helpers
@@ -99,7 +99,7 @@ lspconfig.volar.setup {
   -- Use local typescript and fallback to global
   on_new_config = function(new_config, new_root_dir)
     new_config.init_options.typescript.tsdk =
-    get_typescript_server_path(new_root_dir)
+        get_typescript_server_path(new_root_dir)
   end,
 }
 
@@ -114,7 +114,7 @@ lspconfig.cssls.setup {
   }
 }
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   capabilities = capabilities,
   on_attach = function()
     on_attach()
