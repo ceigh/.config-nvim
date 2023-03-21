@@ -12,11 +12,11 @@ cmp.setup({
   },
   mapping = cmp.mapping.preset.insert({
     -- ["<C-X>"] = cmp.mapping.complete(),
-        ["<C-z>"] = cmp.mapping.complete(),
-        ["<C-x>"] = cmp.mapping.abort(),
-        ["<Tab>"] = cmp.mapping.select_next_item(),
-        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-z>"] = cmp.mapping.complete(),
+    ["<C-x>"] = cmp.mapping.abort(),
+    ["<Tab>"] = cmp.mapping.select_next_item(),
+    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
@@ -49,11 +49,10 @@ local function set_mappings()
   map_key("n", "<leader>f", vim.lsp.buf.format)
 end
 
-local function create_format_on_save_au(name, pattern, callback)
+local function create_format_on_save_au(buffer, callback)
   vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = pattern,
+    buffer = buffer,
     callback = callback or function() vim.lsp.buf.format() end,
-    group = vim.api.nvim_create_augroup(name .. "_on_save", {}),
   })
 end
 
@@ -61,7 +60,6 @@ local function on_attach()
   set_mappings()
 end
 
--- Configurations
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lspconfig = require("lspconfig")
 local util = lspconfig.util
@@ -83,10 +81,14 @@ local function get_typescript_server_path(root_dir)
   end
 end
 
+-- Configurations
 lspconfig.volar.setup {
   capabilities = capabilities,
-  on_attach = function()
+  on_attach = function(client)
     on_attach()
+    -- disable formatting due to stylelint_lsp format on save
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end,
   filetypes = {
     "typescript",
@@ -95,6 +97,8 @@ lspconfig.volar.setup {
     -- "typescriptreact",
     "vue",
     "json",
+    "css",
+    "scss",
   },
   -- Use local typescript and fallback to global
   on_new_config = function(new_config, new_root_dir)
@@ -103,22 +107,46 @@ lspconfig.volar.setup {
   end,
 }
 
--- for completions
-lspconfig.cssls.setup {
+lspconfig.eslint.setup {
   capabilities = capabilities,
-  filetypes = { "css", "scss" },
-  settings = {
-    -- validation via stylelint
-    css = { validate = false },
-    scss = { validate = false }
-  }
+  on_attach = function(client, bufnr)
+    on_attach()
+    create_format_on_save_au(bufnr, function() vim.cmd "EslintFixAll" end)
+  end,
+  filetypes = { "javascript", "typescript", "vue" },
 }
+
+lspconfig.stylelint_lsp.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach()
+    create_format_on_save_au(bufnr)
+  end,
+  filetypes = { "css", "scss", "vue" },
+  settings = {
+    stylelintplus = {
+      autoFixOnFormat = true,
+    },
+  },
+}
+
+-- volar used instead
+-- for completions
+-- lspconfig.cssls.setup {
+--   capabilities = capabilities,
+--   filetypes = { "css", "scss" },
+--   settings = {
+--     -- validation via stylelint
+--     css = { validate = false },
+--     scss = { validate = false }
+--   }
+-- }
 
 lspconfig.lua_ls.setup {
   capabilities = capabilities,
-  on_attach = function()
+  on_attach = function(client, bufnr)
     on_attach()
-    create_format_on_save_au("sumneko_lua", { "*.lua" })
+    create_format_on_save_au(bufnr)
   end,
   settings = {
     Lua = {
@@ -135,45 +163,10 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.eslint.setup {
-  capabilities = capabilities,
-  on_attach = function()
-    on_attach()
-    create_format_on_save_au(
-      "eslint",
-      -- see ft below
-      { "*.js", "*.cjs", "*.ts", "*.vue" },
-      function() vim.cmd "EslintFixAll" end
-    )
-  end,
-  filetypes = { "javascript", "typescript", "vue" },
-}
-
-lspconfig.stylelint_lsp.setup {
-  capabilities = capabilities,
-  on_attach = function()
-    on_attach()
-    create_format_on_save_au(
-      "stylelint_lsp",
-      -- see ft below
-      { "*.css", "*.scss", "*.vue" }
-    )
-  end,
-  filetypes = { "css", "scss", "vue" },
-  settings = {
-    stylelintplus = {
-      autoFixOnFormat = true,
-    },
-  },
-}
-
 lspconfig.gopls.setup {
   capabilities = capabilities,
-  on_attach = function()
+  on_attach = function(client, bufnr)
     on_attach()
-    create_format_on_save_au(
-      "gopls",
-      { "*.go" }
-    )
+    create_format_on_save_au(bufnr)
   end,
 }
