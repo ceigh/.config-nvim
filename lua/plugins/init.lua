@@ -2,6 +2,7 @@ return require("packer").startup(function(use)
   use "wbthomason/packer.nvim"
   use "farmergreg/vim-lastplace"
   use "sheerun/vim-polyglot"
+  use "xiyaowong/virtcolumn.nvim"
 
   use {
     "savq/melange",
