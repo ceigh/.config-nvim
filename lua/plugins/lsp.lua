@@ -170,3 +170,12 @@ lspconfig.gopls.setup {
     create_format_on_save_au(bufnr)
   end,
 }
+
+lspconfig.elixirls.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach()
+    create_format_on_save_au(bufnr)
+  end,
+  cmd = { "/opt/homebrew/bin/elixir-ls" },
+}
