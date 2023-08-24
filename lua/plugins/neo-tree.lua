@@ -1,6 +1,6 @@
 local map_key = require("utils").map_key
 
-map_key("n", "\\", ":Neotree float toggle<CR>")
+map_key("n", "\\", ":Neotree reveal float toggle<CR>")
 
 -- https://github.com/nvim-neo-tree/neo-tree.nvim#longer-example-for-packer
 require("neo-tree").setup {
