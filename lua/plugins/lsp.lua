@@ -1,5 +1,7 @@
--- Completion
+local lspconfig = require("lspconfig")
 local cmp = require("cmp")
+
+-- Completion
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -56,36 +58,41 @@ local function create_format_on_save_au(buffer, callback)
   })
 end
 
-local function on_attach()
-  set_mappings()
-end
-
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
-local util = lspconfig.util
-
 local function get_typescript_server_path(root_dir)
   local global_ts = "/Users/hcg/.config/yarn/global/node_modules/typescript/lib"
   local found_ts = ""
   local function check_dir(path)
-    found_ts = util.path.join(path, "node_modules", "typescript", "lib")
-    if util.path.exists(found_ts) then
+    found_ts =
+        lspconfig.util.path.join(path, "node_modules", "typescript", "lib")
+    if lspconfig.util.path.exists(found_ts) then
       return path
     end
   end
 
-  if util.search_ancestors(root_dir, check_dir) then
+  if lspconfig.util.search_ancestors(root_dir, check_dir) then
     return found_ts
   else
     return global_ts
   end
 end
 
+-- Default config
+lspconfig.util.default_config =
+    vim.tbl_deep_extend("force", lspconfig.util.default_config, {
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      ---@diagnostic disable-next-line: unused-local
+      on_attach = function(client, bufnr)
+        set_mappings()
+        create_format_on_save_au(bufnr)
+      end
+    })
+lspconfig.util.default_config
+.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+
 -- Configurations
 lspconfig.volar.setup {
-  capabilities = capabilities,
   on_attach = function(client)
-    on_attach()
+    set_mappings()
     -- disable formatting due to stylelint_lsp format on save
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
@@ -108,20 +115,15 @@ lspconfig.volar.setup {
 }
 
 lspconfig.eslint.setup {
-  capabilities = capabilities,
+  ---@diagnostic disable-next-line: unused-local
   on_attach = function(client, bufnr)
-    on_attach()
+    set_mappings()
     create_format_on_save_au(bufnr, function() vim.cmd "EslintFixAll" end)
   end,
   filetypes = { "javascript", "typescript", "vue" },
 }
 
 lspconfig.stylelint_lsp.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach()
-    create_format_on_save_au(bufnr)
-  end,
   filetypes = { "css", "scss", "vue" },
   settings = {
     stylelintplus = {
@@ -130,24 +132,9 @@ lspconfig.stylelint_lsp.setup {
   },
 }
 
--- volar used instead
--- for completions
--- lspconfig.cssls.setup {
---   capabilities = capabilities,
---   filetypes = { "css", "scss" },
---   settings = {
---     -- validation via stylelint
---     css = { validate = false },
---     scss = { validate = false }
---   }
--- }
+lspconfig.graphql.setup {}
 
 lspconfig.lua_ls.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach()
-    create_format_on_save_au(bufnr)
-  end,
   settings = {
     Lua = {
       runtime = { version = "LuaJIT" },
@@ -163,19 +150,8 @@ lspconfig.lua_ls.setup {
   },
 }
 
-lspconfig.gopls.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach()
-    create_format_on_save_au(bufnr)
-  end,
-}
+lspconfig.gopls.setup {}
 
 lspconfig.elixirls.setup {
-  capabilities = capabilities,
-  on_attach = function(client, bufnr)
-    on_attach()
-    create_format_on_save_au(bufnr)
-  end,
   cmd = { "/opt/homebrew/bin/elixir-ls" },
 }
