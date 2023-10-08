@@ -1,12 +1,9 @@
-require("indent_blankline").setup {
-  char = "▕",
+require("ibl").setup {
+  indent = {
+    char = "▕",
+  },
 
-  show_trailing_blankline_indent = false,
-
-  use_treesitter = true,
-  -- use_treesitter_scope = true,
-
-  show_current_context = true,
-  show_current_context_start = true,
-  -- show_current_context_start_on_current_line = false,
+  whitespace = {
+    remove_blankline_trail = true,
+  }
 }
