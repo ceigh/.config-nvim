@@ -26,6 +26,7 @@ require("nvim-treesitter.configs").setup {
     "vim",
     "vue",
     "yaml",
+    "gleam",
   },
   ignore_install = {},
   highlight = {

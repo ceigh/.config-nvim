@@ -155,3 +155,5 @@ lspconfig.gopls.setup {}
 lspconfig.elixirls.setup {
   cmd = { "/opt/homebrew/bin/elixir-ls" },
 }
+
+lspconfig.gleam.setup {}
