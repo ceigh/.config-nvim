@@ -1,7 +1,6 @@
 return {
   "https://github.com/nvim-treesitter/nvim-treesitter",
-  event = "VeryLazy",
-  lazy = vim.fn.argc(-1) == 0,
+  event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
 
   config = function()
