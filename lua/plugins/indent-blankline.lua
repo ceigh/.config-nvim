@@ -1,9 +1,16 @@
-require("ibl").setup {
-  indent = {
-    char = "▕",
-  },
+-- https://github.com/lukas-reineke/indent-blankline.nvim
 
-  whitespace = {
-    remove_blankline_trail = true,
-  }
+return {
+  "lukas-reineke/indent-blankline.nvim",
+  event = "VeryLazy",
+  main = "ibl",
+
+  opts = {
+    indent = {
+      char = "▕",
+    },
+    whitespace = {
+      remove_blankline_trail = true,
+    },
+  },
 }

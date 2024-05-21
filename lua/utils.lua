@@ -1,14 +1,9 @@
-local M = {}
+return {
+  map_key = function(l, r, mode, opts)
+    opts = opts or {}
+    opts.noremap = true
+    opts.silent = true
 
-function M.map_key(mode, key, result, opts)
-  vim.keymap.set(
-    mode,
-    key,
-    result,
-    opts or { noremap = true, silent = true }
-  )
-end
-
-M.colorcolumn = "80"
-
-return M
+    vim.keymap.set(mode or "n", l, r, opts)
+  end
+}

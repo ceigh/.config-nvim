@@ -1,33 +1,42 @@
-local map_key = require("utils").map_key
+-- https://github.com/nvim-neo-tree/neo-tree.nvim
 
-map_key("n", "\\", ":Neotree reveal float toggle<CR>")
+return {
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+  },
+  keys = {
+    { "\\", ":Neotree reveal float toggle<CR>", silent = true },
+  },
 
--- https://github.com/nvim-neo-tree/neo-tree.nvim#longer-example-for-packer
-require("neo-tree").setup {
-  enable_diagnostics = false,
+  opts = {
+    enable_diagnostics = false,
 
-  default_component_configs = {
-    container = {
-      enable_character_fade = false,
-    },
-    icon = {
-      folder_closed = "+",
-      folder_open = "-",
-      folder_empty = "~",
-    },
-    modified = { symbol = "" },
-    git_status = {
-      symbols = {
-        added = "",
-        modified = "",
-        deleted = "",
-        renamed = "",
-        untracked = "",
-        unstaged = "",
-        staged = "",
-        conflict = "",
-        ignored = "^",
-      }
+    default_component_configs = {
+      container = {
+        enable_character_fade = false,
+      },
+      icon = {
+        folder_closed = "+",
+        folder_open = "-",
+        folder_empty = "~",
+      },
+      modified = { symbol = "" },
+      git_status = {
+        symbols = {
+          added = "",
+          modified = "",
+          deleted = "",
+          renamed = "",
+          untracked = "",
+          unstaged = "",
+          staged = "",
+          conflict = "",
+          ignored = "^",
+        },
+      },
     },
   },
 }

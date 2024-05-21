@@ -1,24 +1,47 @@
+-- https://github.com/lewis6991/gitsigns.nvim
+
 local map_key = require("utils").map_key
 
-require("gitsigns").setup {
-  on_attach = function()
-    local gs = package.loaded.gitsigns
+return {
+  "lewis6991/gitsigns.nvim",
+  event = "VeryLazy",
 
-    -- Navigation
-    map_key('n', ']g', function()
-      if vim.wo.diff then return ']g' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, { expr = true, silent = true, noremap = true })
+  opts = {
+    on_attach = function()
+      local gitsigns = require("gitsigns")
 
-    map_key('n', '[g', function()
-      if vim.wo.diff then return '[g' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, { expr = true, silent = true, noremap = true })
+      -- Nav
+      map_key(
+        "]g",
+        function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]g", bang = true })
+          else
+            gitsigns.nav_hunk("next")
+          end
+        end
+      )
+      map_key(
+        "[g",
+        function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[g", bang = true })
+          else
+            gitsigns.nav_hunk("prev")
+          end
+        end
+      )
 
-    -- Actions
-    map_key({ 'n', 'v' }, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-    map_key('n', '<leader>hp', gs.preview_hunk)
-  end
+      -- Hunks
+      map_key("<leader>hr", gitsigns.reset_hunk)
+      map_key(
+        "<leader>hr",
+        function()
+          gitsigns.reset_hunk { vim.fn.line("."), vim.fn.line("v") }
+        end,
+        "v"
+      )
+      map_key("<leader>hp", gitsigns.preview_hunk)
+    end
+  }
 }
