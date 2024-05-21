@@ -105,6 +105,7 @@ return {
     lspconfig.gleam.setup {}
     lspconfig.gopls.setup {}
     lspconfig.graphql.setup {}
+    -- lspconfig.unocss.setup {}
 
     lspconfig.elixirls.setup {
       cmd = { "/opt/homebrew/bin/elixir-ls" },
