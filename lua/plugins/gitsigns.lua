@@ -1,9 +1,7 @@
--- https://github.com/lewis6991/gitsigns.nvim
-
 local map_key = require("utils").map_key
 
 return {
-  "lewis6991/gitsigns.nvim",
+  "https://github.com/lewis6991/gitsigns.nvim",
   event = "VeryLazy",
 
   opts = {

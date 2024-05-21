@@ -1,5 +1,3 @@
--- https://github.com/farmergreg/vim-lastplace
-
 return {
-  "farmergreg/vim-lastplace",
+  "https://github.com/farmergreg/vim-lastplace",
 }

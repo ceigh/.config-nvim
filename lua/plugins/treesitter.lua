@@ -1,7 +1,5 @@
--- https://github.com/nvim-treesitter/nvim-treesitter
-
 return {
-  "nvim-treesitter/nvim-treesitter",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
   event = "VeryLazy",
   lazy = vim.fn.argc(-1) == 0,
   build = ":TSUpdate",

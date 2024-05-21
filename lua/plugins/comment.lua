@@ -1,7 +1,5 @@
--- https://github.com/terrortylor/nvim-comment
-
 return {
-  "terrortylor/nvim-comment",
+  "https://github.com/terrortylor/nvim-comment",
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
   },
