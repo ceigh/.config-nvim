@@ -74,14 +74,17 @@ return {
         "javascript",
         "vue",
         "json",
-        "css",
-        "scss",
       },
       -- Use local typescript and fallback to global
       on_new_config = function(new_config, new_root_dir)
         new_config.init_options.typescript.tsdk =
             get_typescript_server_path(new_root_dir)
       end,
+      init_options = {
+        vue = {
+          hybridMode = false,
+        },
+      },
     }
 
     lspconfig.eslint.setup {
