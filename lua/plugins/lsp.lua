@@ -30,6 +30,11 @@ return {
       })
     end
 
+    local function disable_fmt(client)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end
+
     local function get_typescript_server_path(root_dir)
       local global_ts =
       "/Users/hcg/.config/yarn/global/node_modules/typescript/lib"
@@ -53,8 +58,7 @@ return {
     lspconfig.util.default_config =
         vim.tbl_deep_extend("force", lspconfig.util.default_config, {
           capabilities = require("cmp_nvim_lsp").default_capabilities(),
-          ---@diagnostic disable-next-line: unused-local
-          on_attach = function(client, bufnr)
+          on_attach = function(_, bufnr)
             fmt_on_save(bufnr)
           end
         })
@@ -63,18 +67,23 @@ return {
 
     -- Configurations
 
+    -- lspconfig.tsserver.setup {
+    --   on_attach = function(client) disable_fmt(client) end,
+    --   init_options = {
+    --     plugins = {
+    --       {
+    --         name = "@vue/typescript-plugin",
+    --         location = "/Users/hcg/.config/yarn/global/node_modules/@vue/typescript-plugin",
+    --         languages = { "javascript", "typescript", "vue" },
+    --       },
+    --     },
+    --   },
+    --   filetypes = { "javascript", "typescript", "vue" },
+    -- }
+
     lspconfig.volar.setup {
-      on_attach = function(client)
-        -- Disable formatting due to stylelint_lsp format on save
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
-      end,
-      filetypes = {
-        "typescript",
-        "javascript",
-        "vue",
-        "json",
-      },
+      on_attach = function(client) disable_fmt(client) end,
+      filetypes = { "typescript", "javascript", "vue", "json" },
       -- Use local typescript and fallback to global
       on_new_config = function(new_config, new_root_dir)
         new_config.init_options.typescript.tsdk =
@@ -88,8 +97,7 @@ return {
     }
 
     lspconfig.eslint.setup {
-      ---@diagnostic disable-next-line: unused-local
-      on_attach = function(client, bufnr)
+      on_attach = function(_, bufnr)
         fmt_on_save(bufnr, function() vim.cmd "EslintFixAll" end)
       end,
       filetypes = { "javascript", "typescript", "vue" },
