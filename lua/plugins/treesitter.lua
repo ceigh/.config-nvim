@@ -22,6 +22,7 @@ return {
         "graphql",
         "html",
         "javascript",
+        "jsdoc",
         "json",
         "json5",
         "jsonc",
