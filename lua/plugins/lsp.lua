@@ -1,13 +1,21 @@
 return {
   "https://github.com/neovim/nvim-lspconfig",
   dependencies = {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "dcampos/nvim-snippy",
-      "dcampos/cmp-snippy",
+    {
+      "hrsh7th/nvim-cmp",
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "dcampos/nvim-snippy",
+        "dcampos/cmp-snippy",
+      },
+    },
+    {
+      "MunifTanjim/prettier.nvim",
+      dependencies = {
+        "jose-elias-alvarez/null-ls.nvim",
+      },
     },
   },
   event = { "BufReadPre", "BufNewFile" },
@@ -145,6 +153,25 @@ return {
 
     lspconfig.elixirls.setup {
       cmd = { "/opt/homebrew/bin/elixir-ls" },
+    }
+
+    -- Prettier
+    require("null-ls").setup {
+      on_attach = function(_, bufnr) fmt_on_save(bufnr) end,
+    }
+    require("prettier").setup {
+      bin = 'prettierd',
+      filetypes = {
+        "html",
+        "css",
+        "scss",
+        -- "typescript",
+        "javascript",
+        "json",
+        "yaml",
+        "graphql",
+        "markdown",
+      },
     }
 
     -- Hotkeys
