@@ -163,6 +163,7 @@ return {
       bin = 'prettierd',
       filetypes = {
         "html",
+        "vue",
         "css",
         "scss",
         -- "typescript",
