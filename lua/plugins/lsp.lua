@@ -91,7 +91,7 @@ return {
 
     lspconfig.volar.setup {
       on_attach = function(client) disable_fmt(client) end,
-      filetypes = { "typescript", "javascript", "vue", "json" },
+      filetypes = { "typescript", "javascript", "vue", "json", "css", "scss" },
       -- Use local typescript and fallback to global
       on_new_config = function(new_config, new_root_dir)
         new_config.init_options.typescript.tsdk =
@@ -108,7 +108,17 @@ return {
       on_attach = function(_, bufnr)
         fmt_on_save(bufnr, function() vim.cmd "EslintFixAll" end)
       end,
-      filetypes = { "javascript", "typescript", "vue" },
+      filetypes = {
+        "javascript",
+        "typescript",
+        "vue",
+        "html",
+        "css",
+        "scss",
+        "markdown",
+        "json",
+        "jsonc",
+      },
     }
 
     lspconfig.stylelint_lsp.setup {
