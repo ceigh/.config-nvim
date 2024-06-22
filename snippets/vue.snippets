@@ -1,33 +1,41 @@
 snippet _vue-options
-	<script lang="ts">
-	import { defineComponent } from "vue"
-	
-	export default defineComponent({})
-	</script>
+  <script lang='ts'>
+  import { defineComponent } from 'vue'
 
-	<template>
-		<div>
-			${0}
-		</div>
-	</template>
+  export default defineComponent({})
+  </script>
 
-	<style module lang="scss">
-	//
-	</style>
+  <template>
+    <div>
+      ${0}
+    </div>
+  </template>
+
+  <style module lang='scss'>
+  //
+  </style>
 
 snippet _vue-setup
-	<script setup lang="ts">
-	</script>
+  <script setup lang='ts'>
+  </script>
 
-	<template>
-		${0}
-	</template>
+  <template>
+    ${0}
+  </template>
 
-	<style module lang="scss">
-	//
-	</style>
+  <style module lang='scss'>
+  //
+  </style>
 
-	<i18n lang="yml">
-	ru:
-		
-	</i18n>
+  <i18n lang='yml'>
+  ru:
+
+  </i18n>
+
+snippet _vue-setup_simple
+  <script setup>
+  </script>
+
+  <template>
+    ${0}
+  </template>
