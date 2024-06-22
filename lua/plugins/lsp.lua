@@ -28,6 +28,7 @@ return {
 
   config = function()
     local lspconfig = require("lspconfig")
+    local paths = require("utils").paths
 
     -- Appearance
     vim.diagnostic.config {
@@ -51,7 +52,7 @@ return {
 
     local function get_typescript_server_path(root_dir)
       local global_ts =
-      "/Users/hcg/.config/yarn/global/node_modules/typescript/lib"
+          paths.bun .. "install/global/node_modules/typescript/lib"
       local found_ts = ""
       local function check_dir(path)
         found_ts =
@@ -80,20 +81,6 @@ return {
     .didChangeWatchedFiles.dynamicRegistration = true
 
     -- Configurations
-
-    -- lspconfig.tsserver.setup {
-    --   on_attach = function(client) disable_fmt(client) end,
-    --   init_options = {
-    --     plugins = {
-    --       {
-    --         name = "@vue/typescript-plugin",
-    --         location = "/Users/hcg/.config/yarn/global/node_modules/@vue/typescript-plugin",
-    --         languages = { "javascript", "typescript", "vue" },
-    --       },
-    --     },
-    --   },
-    --   filetypes = { "javascript", "typescript", "vue" },
-    -- }
 
     lspconfig.volar.setup {
       on_attach = function(client) disable_fmt(client) end,
@@ -168,7 +155,7 @@ return {
     lspconfig.gopls.setup {}
 
     lspconfig.elixirls.setup {
-      cmd = { "/opt/homebrew/bin/elixir-ls" },
+      cmd = { paths.brew .. "elixir-ls" },
     }
 
     -- Prettier
