@@ -17,6 +17,12 @@ return {
         "jose-elias-alvarez/null-ls.nvim",
       },
     },
+    {
+      "Exafunction/codeium.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      }
+    }
   },
   event = { "BufReadPre", "BufNewFile" },
 
@@ -213,10 +219,14 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "snippy" },
+        { name = "codeium" },
       }, {
         { name = "buffer" },
         { name = "path" },
       })
     })
+
+    -- Codeium
+    require("codeium").setup({})
   end,
 }

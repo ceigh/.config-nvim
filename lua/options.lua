@@ -17,7 +17,7 @@ vim.bo.smartindent = true
 vim.bo.swapfile = false
 
 vim.wo.number = true
-vim.wo.relativenumber = false
+vim.wo.relativenumber = true
 vim.wo.signcolumn = "yes"
 vim.wo.wrap = true
 
