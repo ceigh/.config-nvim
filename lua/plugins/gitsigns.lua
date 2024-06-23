@@ -5,6 +5,10 @@ return {
   event = "VeryLazy",
 
   opts = {
+    preview_config = {
+      border = "rounded",
+    },
+
     on_attach = function()
       local gitsigns = require("gitsigns")
 
