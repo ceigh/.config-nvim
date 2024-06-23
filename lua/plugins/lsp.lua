@@ -31,10 +31,19 @@ return {
     local paths = require("utils").paths
 
     -- Appearance
+
+    -- LSP
     vim.diagnostic.config {
       virtual_text = false,
-      update_in_insert = true,
+      update_in_insert = false,
     }
+
+    -- Hover window opts
+    vim.lsp.handlers["textDocument/hover"] =
+        vim.lsp.with(vim.lsp.handlers.hover, {
+          border = "rounded",
+          max_width = 60,
+        })
 
     -- Helpers
 
@@ -189,13 +198,44 @@ return {
     map_key("<leader>f", vim.lsp.buf.format)
 
     -- Completion
+
     local cmp = require("cmp")
+    local cmp_window_opts = { scrollbar = false }
+
     cmp.setup({
+      window = {
+        completion = cmp.config.window.bordered(cmp_window_opts),
+        documentation = cmp.config.window.bordered(cmp_window_opts)
+      },
+      performance = {
+        max_view_entries = 32,
+      },
+      completion = {
+        keyword_length = 2,
+      },
+      experimental = {
+        ghost_text = true,
+      },
+
+      formatting = {
+        expandable_indicator = false,
+        format = function(_, vim_item)
+          local label = vim_item.abbr
+          local truncated_label = vim.fn.strcharpart(label, 0, 16)
+          if truncated_label ~= label then
+            vim_item.abbr = truncated_label .. "…"
+          end
+          vim_item.menu = nil
+          return vim_item
+        end,
+      },
+
       snippet = {
         expand = function(args)
           require("snippy").expand_snippet(args.body)
         end,
       },
+
       mapping = cmp.mapping.preset.insert({
         ["<C-z>"] = cmp.mapping.complete(),
         ["<C-x>"] = cmp.mapping.abort(),
@@ -203,10 +243,11 @@ return {
         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
       }),
+
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "snippy" },
-        { name = "codeium" },
+        { name = "codeium", max_item_count = 4 },
       }, {
         { name = "buffer" },
         { name = "path" },

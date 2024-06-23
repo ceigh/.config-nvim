@@ -20,7 +20,7 @@ return {
       icon = {
         folder_closed = "+",
         folder_open = "-",
-        folder_empty = "~",
+        folder_empty = "-",
       },
       modified = { symbol = "" },
       git_status = {
@@ -33,7 +33,7 @@ return {
           unstaged = "",
           staged = "",
           conflict = "",
-          ignored = "^",
+          ignored = "",
         },
       },
     },

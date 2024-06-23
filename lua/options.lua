@@ -12,14 +12,15 @@ vim.o.listchars = "tab:⇥ ,trail:·"
 vim.o.softtabstop = 2
 vim.o.mouse = "a"
 vim.o.clipboard = "unnamedplus"
+vim.o.laststatus = 0
 
 vim.bo.smartindent = true
 vim.bo.swapfile = false
 
 vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.relativenumber = false
 vim.wo.signcolumn = "yes"
-vim.wo.wrap = true
+vim.wo.wrap = false
 
 -- Disable unused providers
 vim.g.loaded_node_provider = 0

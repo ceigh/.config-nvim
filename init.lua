@@ -1,4 +1,5 @@
 require("options")
 require("keymaps")
 require("commands")
+require("theme")
 require("init-plugins")
