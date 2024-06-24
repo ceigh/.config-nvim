@@ -36,6 +36,10 @@ return {
     vim.diagnostic.config {
       virtual_text = false,
       update_in_insert = false,
+      float = {
+        border = "rounded",
+        max_width = 60,
+      }
     }
 
     -- Hover window opts
@@ -59,25 +63,6 @@ return {
       client.server_capabilities.documentRangeFormattingProvider = false
     end
 
-    local function get_typescript_server_path(root_dir)
-      local global_ts =
-          paths.bun .. "install/global/node_modules/typescript/lib"
-      local found_ts = ""
-      local function check_dir(path)
-        found_ts =
-            lspconfig.util.path.join(path, "node_modules", "typescript", "lib")
-        if lspconfig.util.path.exists(found_ts) then
-          return path
-        end
-      end
-
-      if lspconfig.util.search_ancestors(root_dir, check_dir) then
-        return found_ts
-      else
-        return global_ts
-      end
-    end
-
     -- Default config
     lspconfig.util.default_config =
         vim.tbl_deep_extend("force", lspconfig.util.default_config, {
@@ -93,16 +78,13 @@ return {
 
     lspconfig.volar.setup {
       on_attach = function(client) disable_fmt(client) end,
-      filetypes = { "typescript", "javascript", "vue", "json", "css", "scss" },
-      -- Use local typescript and fallback to global
-      on_new_config = function(new_config, new_root_dir)
-        new_config.init_options.typescript.tsdk =
-            get_typescript_server_path(new_root_dir)
-      end,
-      init_options = {
-        vue = {
-          hybridMode = false,
-        },
+      filetypes = {
+        "typescript",
+        "javascript",
+        "vue",
+        -- "json",
+        "css",
+        "scss",
       },
     }
 
@@ -114,28 +96,34 @@ return {
         "javascript",
         "typescript",
         "vue",
-        "html",
-        "css",
-        "scss",
-        "markdown",
+        -- "html",
+        -- "css",
+        -- "scss",
+        -- "markdown",
         -- "json",
         -- "jsonc",
       },
     }
 
     lspconfig.stylelint_lsp.setup {
-      filetypes = { "css", "scss", "vue" },
       settings = {
         stylelintplus = {
           autoFixOnFormat = true,
         },
+      },
+      filetypes = {
+        "css",
+        "scss",
+        "vue",
       },
     }
 
     require 'lspconfig'.lua_ls.setup {
       on_init = function(client)
         local path = client.workspace_folders[1].name
+        ---@diagnostic disable-next-line: undefined-field
         if vim.loop.fs_stat(path .. '/.luarc.json') or
+            ---@diagnostic disable-next-line: undefined-field
             vim.loop.fs_stat(path .. '/.luarc.jsonc') then
           return
         end
@@ -164,7 +152,7 @@ return {
     lspconfig.gopls.setup {}
 
     lspconfig.elixirls.setup {
-      cmd = { paths.brew .. "elixir-ls" },
+      cmd = { paths.brew_bin .. "elixir-ls" },
     }
 
     -- Prettier
@@ -207,16 +195,6 @@ return {
         completion = cmp.config.window.bordered(cmp_window_opts),
         documentation = cmp.config.window.bordered(cmp_window_opts)
       },
-      performance = {
-        max_view_entries = 32,
-      },
-      completion = {
-        keyword_length = 2,
-      },
-      experimental = {
-        ghost_text = true,
-      },
-
       formatting = {
         expandable_indicator = false,
         format = function(_, vim_item)
@@ -246,8 +224,8 @@ return {
 
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
+        { name = "codeium", max_item_count = 8 },
         { name = "snippy" },
-        { name = "codeium", max_item_count = 4 },
       }, {
         { name = "buffer" },
         { name = "path" },

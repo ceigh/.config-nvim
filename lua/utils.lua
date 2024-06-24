@@ -1,4 +1,6 @@
-local home = os.getenv("HOME") .. "/"
+-- local home = os.getenv("HOME") .. "/"
+-- local bun_path = home .. ".bun/"
+local brew_path = "/opt/homebrew/"
 
 return {
   map_key = function(l, r, mode, opts)
@@ -10,7 +12,9 @@ return {
   end,
 
   paths = {
-    bun = home .. ".bun/",
-    brew = "/opt/homebrew/bin/",
+    -- bun = bun_path,
+    -- bun_modules = bun_path .. "install/global/node_modules/",
+    -- brew = brew_path,
+    brew_bin = brew_path .. "bin",
   },
 }
