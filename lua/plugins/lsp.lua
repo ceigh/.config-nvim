@@ -118,8 +118,8 @@ return {
         "css",
         "scss",
         "markdown",
-        "json",
-        "jsonc",
+        -- "json",
+        -- "jsonc",
       },
     }
 
