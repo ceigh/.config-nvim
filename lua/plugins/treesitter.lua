@@ -4,7 +4,7 @@ return {
   build = ":TSUpdate",
 
   config = function()
-    require("nvim-treesitter.configs").setup {
+    require("nvim-treesitter.configs").setup({
       modules = {},
       highlight = { enable = true },
       indent = { enable = true },
@@ -36,6 +36,6 @@ return {
         "yaml",
         "gleam",
       },
-    }
+    })
   end,
 }

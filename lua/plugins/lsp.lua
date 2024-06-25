@@ -76,7 +76,7 @@ return {
 
     -- Configurations
 
-    lspconfig.volar.setup {
+    lspconfig.volar.setup({
       on_attach = function(client) disable_fmt(client) end,
       filetypes = {
         "typescript",
@@ -86,9 +86,9 @@ return {
         "css",
         "scss",
       },
-    }
+    })
 
-    lspconfig.eslint.setup {
+    lspconfig.eslint.setup({
       on_attach = function(_, bufnr)
         fmt_on_save(bufnr, function() vim.cmd "EslintFixAll" end)
       end,
@@ -103,9 +103,9 @@ return {
         -- "json",
         -- "jsonc",
       },
-    }
+    })
 
-    lspconfig.stylelint_lsp.setup {
+    lspconfig.stylelint_lsp.setup({
       settings = {
         stylelintplus = {
           autoFixOnFormat = true,
@@ -116,9 +116,9 @@ return {
         "scss",
         "vue",
       },
-    }
+    })
 
-    require 'lspconfig'.lua_ls.setup {
+    require 'lspconfig'.lua_ls.setup({
       on_init = function(client)
         local path = client.workspace_folders[1].name
         ---@diagnostic disable-next-line: undefined-field
@@ -141,25 +141,25 @@ return {
       settings = {
         Lua = {}
       }
-    }
+    })
 
-    -- lspconfig.unocss.setup {}
+    -- lspconfig.unocss.setup({})
 
-    lspconfig.graphql.setup {}
+    lspconfig.graphql.setup({})
 
-    lspconfig.gleam.setup {}
+    lspconfig.gleam.setup({})
 
-    lspconfig.gopls.setup {}
+    lspconfig.gopls.setup({})
 
-    lspconfig.elixirls.setup {
+    lspconfig.elixirls.setup({
       cmd = { paths.brew_bin .. "elixir-ls" },
-    }
+    })
 
     -- Prettier
-    require("null-ls").setup {
+    require("null-ls").setup({
       on_attach = function(_, bufnr) fmt_on_save(bufnr) end,
-    }
-    require("prettier").setup {
+    })
+    require("prettier").setup({
       bin = 'prettierd',
       filetypes = {
         "html",
@@ -174,7 +174,7 @@ return {
         "graphql",
         "markdown",
       },
-    }
+    })
 
     -- Hotkeys
     local map_key = require("utils").map_key
