@@ -37,5 +37,24 @@ return {
         },
       },
     },
+
+    filesystem = {
+      window = {
+        mappings = {
+          -- Trash files instead of rm (lifesaver!)
+          ["d"] = function(state)
+            local path = state.tree:get_node().path
+            local msg = "Are you sure you want to trash " .. path .. "?"
+
+            require("neo-tree.ui.inputs").confirm(msg, function(confirmed)
+              if not confirmed then return end
+
+              vim.fn.system("trash -F " .. vim.fn.fnameescape(path))
+              require("neo-tree.sources.manager").refresh(state.name)
+            end)
+          end
+        },
+      },
+    },
   },
 }
