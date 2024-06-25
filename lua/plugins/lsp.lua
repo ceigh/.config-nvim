@@ -169,6 +169,7 @@ return {
         -- "typescript",
         "javascript",
         "json",
+        "jsonc",
         "yaml",
         "graphql",
         "markdown",
