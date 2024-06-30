@@ -20,7 +20,7 @@ vim.bo.swapfile = false
 vim.wo.number = true
 vim.wo.relativenumber = false
 vim.wo.signcolumn = "yes"
-vim.wo.wrap = false
+vim.wo.wrap = true
 
 -- Disable unused providers
 vim.g.loaded_node_provider = 0
