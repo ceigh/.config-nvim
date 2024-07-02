@@ -13,3 +13,5 @@ map_key("gcc", "<nop>", "")
 
 map_key(";", ":nohlsearch<CR>")
 map_key("<leader>l", ":Lazy<CR>")
+
+map_key("<leader>t", ":'<,'>!typograf --stdin --html-entity-type name --html-entity-only-invisible --no-color<CR>", "v")
