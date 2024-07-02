@@ -1,50 +1,15 @@
 return {
 	"https://github.com/neovim/nvim-lspconfig",
-	dependencies = {
-		{
-			"hrsh7th/nvim-cmp",
-			dependencies = {
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"dcampos/nvim-snippy",
-				"dcampos/cmp-snippy",
-			},
-		},
-		{
-			"Exafunction/codeium.nvim",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-			},
-		},
-	},
 	event = { "BufReadPre", "BufNewFile" },
 
 	config = function()
 		local lspconfig = require("lspconfig")
-		local paths = require("utils").paths
-
-		-- Appearance
-
-		-- LSP
-		vim.diagnostic.config({
-			virtual_text = false,
-			update_in_insert = false,
-			float = {
-				border = "rounded",
-				max_width = 60,
-			},
-		})
-
-		-- Hover window opts
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "rounded",
-			max_width = 60,
-		})
+		local utils = require("utils")
+		local paths = utils.paths
 
 		-- Helpers
 
-		local fmt_on_save = require("utils").lsp.fmt_on_save
+		local fmt_on_save = utils.lsp.fmt_on_save
 
 		local function disable_fmt(client)
 			client.server_capabilities.documentFormattingProvider = false
@@ -120,6 +85,7 @@ return {
 				local path = client.workspace_folders[1].name
 				---@diagnostic disable-next-line: undefined-field
 				if
+					---@diagnostic disable-next-line: undefined-field
 					vim.loop.fs_stat(path .. "/.luarc.json")
 					---@diagnostic disable-next-line: undefined-field
 					or vim.loop.fs_stat(path .. "/.luarc.jsonc")
@@ -152,6 +118,24 @@ return {
 			cmd = { paths.brew_bin .. "elixir-ls" },
 		})
 
+		-- Appearance
+
+		-- LSP
+		vim.diagnostic.config({
+			virtual_text = false,
+			update_in_insert = false,
+			float = {
+				border = "rounded",
+				max_width = 60,
+			},
+		})
+
+		-- Hover window opts
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			border = "rounded",
+			max_width = 60,
+		})
+
 		-- Hotkeys
 		local map_key = require("utils").map_key
 		map_key("[d", vim.diagnostic.goto_prev)
@@ -161,55 +145,5 @@ return {
 		map_key("gd", vim.lsp.buf.definition)
 		map_key("gi", vim.lsp.buf.implementation)
 		map_key("<leader>f", vim.lsp.buf.format)
-
-		-- Completion
-
-		local cmp = require("cmp")
-		local cmp_window_opts = { scrollbar = false }
-
-		cmp.setup({
-			window = {
-				completion = cmp.config.window.bordered(cmp_window_opts),
-				documentation = cmp.config.window.bordered(cmp_window_opts),
-			},
-			formatting = {
-				expandable_indicator = false,
-				format = function(_, vim_item)
-					local label = vim_item.abbr
-					local truncated_label = vim.fn.strcharpart(label, 0, 16)
-					if truncated_label ~= label then
-						vim_item.abbr = truncated_label .. "…"
-					end
-					vim_item.menu = nil
-					return vim_item
-				end,
-			},
-
-			snippet = {
-				expand = function(args)
-					require("snippy").expand_snippet(args.body)
-				end,
-			},
-
-			mapping = cmp.mapping.preset.insert({
-				["<C-z>"] = cmp.mapping.complete(),
-				["<C-x>"] = cmp.mapping.abort(),
-				["<Tab>"] = cmp.mapping.select_next_item(),
-				["<S-Tab>"] = cmp.mapping.select_prev_item(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-			}),
-
-			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "codeium", max_item_count = 8 },
-				{ name = "snippy" },
-			}, {
-				{ name = "buffer" },
-				{ name = "path" },
-			}),
-		})
-
-		-- Codeium
-		require("codeium").setup({})
 	end,
 }
