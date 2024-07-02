@@ -12,17 +12,11 @@ return {
       },
     },
     {
-      "MunifTanjim/prettier.nvim",
-      dependencies = {
-        "jose-elias-alvarez/null-ls.nvim",
-      },
-    },
-    {
       "Exafunction/codeium.nvim",
       dependencies = {
         "nvim-lua/plenary.nvim",
-      }
-    }
+      },
+    },
   },
   event = { "BufReadPre", "BufNewFile" },
 
@@ -51,12 +45,7 @@ return {
 
     -- Helpers
 
-    local function fmt_on_save(buffer, callback)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = buffer,
-        callback = callback or function() vim.lsp.buf.format() end,
-      })
-    end
+    local fmt_on_save = require("utils").lsp.fmt_on_save
 
     local function disable_fmt(client)
       client.server_capabilities.documentFormattingProvider = false
@@ -119,6 +108,7 @@ return {
     })
 
     require 'lspconfig'.lua_ls.setup({
+      on_attach = function(client) disable_fmt(client) end,
       on_init = function(client)
         local path = client.workspace_folders[1].name
         ---@diagnostic disable-next-line: undefined-field
@@ -153,27 +143,6 @@ return {
 
     lspconfig.elixirls.setup({
       cmd = { paths.brew_bin .. "elixir-ls" },
-    })
-
-    -- Prettier
-    require("null-ls").setup({
-      on_attach = function(_, bufnr) fmt_on_save(bufnr) end,
-    })
-    require("prettier").setup({
-      bin = 'prettierd',
-      filetypes = {
-        "html",
-        "vue",
-        "css",
-        "scss",
-        -- "typescript",
-        "javascript",
-        "json",
-        "jsonc",
-        "yaml",
-        "graphql",
-        "markdown",
-      },
     })
 
     -- Hotkeys
