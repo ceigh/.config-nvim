@@ -1,5 +1,5 @@
 return {
-  "https://github.com/windwp/nvim-autopairs",
-  event = "InsertEnter",
-  config = true,
+	"https://github.com/windwp/nvim-autopairs",
+	event = "InsertEnter",
+	config = true,
 }

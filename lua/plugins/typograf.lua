@@ -1,3 +1,3 @@
 return {
-  dir = "~/src/typograf.nvim",
+	dir = "~/src/typograf.nvim",
 }

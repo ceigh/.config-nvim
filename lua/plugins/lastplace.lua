@@ -1,3 +1,3 @@
 return {
-  "https://github.com/farmergreg/vim-lastplace",
+	"https://github.com/farmergreg/vim-lastplace",
 }

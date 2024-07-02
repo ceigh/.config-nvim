@@ -1,7 +1,7 @@
 -- Colors from https://github.com/triyanox/vercel-theme
 -- Initially converted via https://github.com/arcticlimer/djanho
 
-vim.cmd [[highlight clear]]
+vim.cmd([[highlight clear]])
 local h = vim.api.nvim_set_hl
 
 local gray100 = "#ffffff"
