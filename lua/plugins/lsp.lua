@@ -108,7 +108,13 @@ return {
     })
 
     require 'lspconfig'.lua_ls.setup({
-      on_attach = function(client) disable_fmt(client) end,
+      on_attach = function(client, bufnr)
+        disable_fmt(client)
+        fmt_on_save(bufnr, function()
+          require("stylua-nvim").format_file()
+        end)
+      end,
+
       on_init = function(client)
         local path = client.workspace_folders[1].name
         ---@diagnostic disable-next-line: undefined-field
@@ -128,9 +134,8 @@ return {
               }
             })
       end,
-      settings = {
-        Lua = {}
-      }
+
+      settings = { Lua = {} }
     })
 
     -- lspconfig.unocss.setup({})
