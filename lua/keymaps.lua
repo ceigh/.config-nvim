@@ -15,3 +15,10 @@ map_key(";", ":nohlsearch<CR>")
 map_key("<leader>l", ":Lazy<CR>")
 
 map_key("<leader>t", ":'<,'>!typograf --stdin --html-entity-type name --html-entity-only-invisible --no-color<CR>", "v")
+
+map_key("<leader>s", function()
+	vim.o.spell = not vim.o.spell
+	if vim.o.spell then
+		vim.o.spelllang = "en_us"
+	end
+end)
