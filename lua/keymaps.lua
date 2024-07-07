@@ -22,3 +22,5 @@ map_key("<leader>s", function()
 		vim.o.spelllang = "en_us"
 	end
 end)
+
+map_key("<leader>m", ":MarkdownPreviewToggle<CR>")
