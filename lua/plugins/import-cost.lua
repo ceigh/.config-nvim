@@ -4,6 +4,7 @@ local ft = {
 }
 
 return {
+	enabled = false,
 	"https://github.com/barrett-ruth/import-cost.nvim",
 	build = "sh install.sh bun install",
 	ft = ft,
