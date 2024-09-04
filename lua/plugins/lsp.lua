@@ -32,12 +32,16 @@ return {
 				disable_fmt(client)
 			end,
 			filetypes = {
-				"typescript",
 				"javascript",
+				"typescript",
 				"vue",
-				-- "json",
 				"css",
 				"scss",
+			},
+			init_options = {
+				vue = {
+					hybridMode = false,
+				},
 			},
 		})
 
@@ -51,10 +55,12 @@ return {
 				"javascript",
 				"typescript",
 				"vue",
-				-- "html",
-				-- "css",
-				-- "scss",
-				-- "markdown",
+
+				-- Only if eslint stylistic supported by project
+				"html",
+				"css",
+				"scss",
+				"markdown",
 				-- "json",
 				-- "jsonc",
 			},
