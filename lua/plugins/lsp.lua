@@ -112,8 +112,6 @@ return {
 			settings = { Lua = {} },
 		})
 
-		-- lspconfig.unocss.setup({})
-
 		lspconfig.graphql.setup({})
 
 		lspconfig.gleam.setup({})
