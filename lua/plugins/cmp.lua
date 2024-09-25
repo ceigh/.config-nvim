@@ -120,6 +120,6 @@ return {
 		end)
 
 		-- Codeium
-		require("codeium").setup({})
+		-- require("codeium").setup({})
 	end,
 }
