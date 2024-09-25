@@ -1,5 +1,5 @@
 return {
 	"https://github.com/bennypowers/template-literal-comments.nvim",
-	ft = { "javascript", "typescript" },
+	ft = { "javascript", "typescript", "vue" },
 	config = true,
 }
