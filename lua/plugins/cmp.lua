@@ -8,12 +8,12 @@ return {
 			"dcampos/nvim-snippy",
 			"dcampos/cmp-snippy",
 		},
-		{
-			"Exafunction/codeium.nvim",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-			},
-		},
+		-- {
+		-- 	"Exafunction/codeium.nvim",
+		-- 	dependencies = {
+		-- 		"nvim-lua/plenary.nvim",
+		-- 	},
+		-- },
 	},
 	event = "InsertEnter",
 
@@ -105,7 +105,7 @@ return {
 					name = "nvim_lsp",
 					entry_filter = vue_entry_filter,
 				},
-				{ name = "codeium", max_item_count = 8 },
+				-- { name = "codeium", max_item_count = 8 },
 				{ name = "snippy" },
 			}, {
 				{ name = "buffer" },
