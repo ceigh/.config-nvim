@@ -1,8 +1,6 @@
-snippet ___vue-options
-  <script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({})
+snippet ___vueSetup
+  <script setup lang="ts">
+  //
   </script>
 
   <template>
@@ -15,27 +13,40 @@ snippet ___vue-options
   //
   </style>
 
-snippet ___vue-setup
-  <script setup lang="ts">
+snippet ___vueOptions
+  <script lang="ts">
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
+  //
+  })
   </script>
 
   <template>
-    component${0}
+    <div>
+      component${0}
+    </div>
   </template>
 
   <style module lang="scss">
   //
   </style>
 
-  <i18n>
-  ru:
+snippet ___vueOptionsOld
+  <script lang="ts">
+  import Vue from 'vue'
 
-  </i18n>
-
-snippet ___vue-setup_simple
-  <script setup>
+  export default Vue.extend({
+  //
+  })
   </script>
 
   <template>
-    component${0}
+    <div>
+      component${0}
+    </div>
   </template>
+
+  <style module lang="scss">
+  //
+  </style>
