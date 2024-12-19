@@ -24,6 +24,7 @@
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "prettier.nvim": { "branch": "main", "commit": "d98e732cb73690b07c00c839c924be1d1d9ac5c2" },
   "stylua-nvim": { "branch": "main", "commit": "ce59a353f02938cba3e0285e662fcd3901cd270f" },
+  "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "template-literal-comments.nvim": { "branch": "main", "commit": "9640cf73a77090a3d044c19766831e6401442095" },
   "trim.nvim": { "branch": "master", "commit": "84a1016c7484943e9fbb961f807c3745342b2462" },
   "vercel-theme.nvim": { "branch": "master", "commit": "02c8ee1988b1ce7734ae33de486e33bf9a8011b8" },
