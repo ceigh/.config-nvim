@@ -4,7 +4,7 @@ return {
 
 	config = {
 		keymaps = {
-			accept_suggestion = "<A-Tab>",
+			accept_suggestion = "<S-Up>",
 		},
 	},
 }
