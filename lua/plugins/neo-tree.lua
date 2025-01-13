@@ -57,6 +57,8 @@ return {
 					end,
 				},
 			},
+
+			find_command = "fd",
 		},
 	},
 }
