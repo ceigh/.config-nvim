@@ -114,12 +114,12 @@ return {
 
 		lspconfig.graphql.setup({})
 
-		lspconfig.gleam.setup({})
+		-- lspconfig.gleam.setup({})
 
-		lspconfig.gopls.setup({})
+		-- lspconfig.gopls.setup({})
 
 		lspconfig.elixirls.setup({
-			cmd = { paths.brew_bin .. "elixir-ls" },
+			cmd = { paths.brew_bin .. "/elixir-ls" },
 		})
 
 		-- Appearance
