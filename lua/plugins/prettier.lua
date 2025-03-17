@@ -13,6 +13,8 @@ local ft = {
 }
 
 return {
+	enabled = false,
+
 	"https://github.com/MunifTanjim/prettier.nvim",
 	dependencies = {
 		"jose-elias-alvarez/null-ls.nvim",
