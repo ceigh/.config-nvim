@@ -11,7 +11,7 @@ return {
 
 	opts = {
 		enable_diagnostics = false,
-		popup_border_style = "rounded",
+		popup_border_style = "solid",
 
 		default_component_configs = {
 			container = {

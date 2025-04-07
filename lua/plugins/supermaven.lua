@@ -4,7 +4,7 @@ return {
 	"https://github.com/supermaven-inc/supermaven-nvim",
 	event = "InsertEnter",
 
-	config = {
+	opts = {
 		keymaps = {
 			accept_suggestion = "<S-Up>",
 		},

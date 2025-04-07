@@ -13,6 +13,7 @@ vim.o.softtabstop = 2
 vim.o.mouse = "a"
 vim.o.clipboard = "unnamedplus"
 vim.o.laststatus = 0
+vim.o.winborder = "rounded"
 
 vim.bo.smartindent = true
 vim.bo.swapfile = false

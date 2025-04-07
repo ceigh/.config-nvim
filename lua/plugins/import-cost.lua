@@ -9,7 +9,7 @@ return {
 	build = "sh install.sh bun install",
 	ft = ft,
 
-	config = {
+	opts = {
 		filetypes = ft,
 		format = {
 			virtual_text = "%s, gz: %s",
