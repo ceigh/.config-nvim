@@ -85,6 +85,22 @@ return {
 			-- },
 		})
 
+		lspconfig.oxlint.setup({
+			on_attach = function(_, bufnr)
+				fmt_on_save(bufnr, function()
+					vim.cmd("OxcFixAll")
+				end)
+			end,
+			filetypes = {
+				"javascript",
+				"typescript",
+				"vue",
+			},
+			settings = {
+				single_file_support = true,
+			},
+		})
+
 		lspconfig.stylelint_lsp.setup({
 			settings = {
 				stylelintplus = {
