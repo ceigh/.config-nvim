@@ -69,10 +69,10 @@ return {
 		end
 
 		cmp.setup({
-			window = {
-				completion = cmp.config.window.bordered(cmp_window_opts),
-				documentation = cmp.config.window.bordered(cmp_window_opts),
-			},
+			-- window = {
+			-- 	completion = cmp.config.window.bordered(cmp_window_opts),
+			-- 	documentation = cmp.config.window.bordered(cmp_window_opts),
+			-- },
 			formatting = {
 				expandable_indicator = false,
 				format = function(_, vim_item)

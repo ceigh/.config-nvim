@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"https://github.com/nvim-telescope/telescope.nvim",
 
 	dependencies = {
@@ -43,7 +44,7 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("live_grep_args")
 
-		vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "NeoTreeFloatBorder" })
-		vim.api.nvim_set_hl(0, "TelescopeTitle", { link = "Number" })
+		-- vim.api.nvim_set_hl(0, "TelescopeBorder", { link = "NeoTreeFloatBorder" })
+		-- vim.api.nvim_set_hl(0, "TelescopeTitle", { link = "Number" })
 	end,
 }

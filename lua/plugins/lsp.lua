@@ -164,14 +164,14 @@ return {
 			virtual_text = false,
 			update_in_insert = false,
 			float = {
-				border = "rounded",
+				border = "none",
 				max_width = 60,
 			},
 		})
 
 		-- Hover window opts
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "rounded",
+			border = "none",
 			max_width = 60,
 		})
 

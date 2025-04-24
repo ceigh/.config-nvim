@@ -6,7 +6,7 @@ return {
 
 	opts = {
 		preview_config = {
-			border = "rounded",
+			border = "none",
 		},
 
 		on_attach = function()
