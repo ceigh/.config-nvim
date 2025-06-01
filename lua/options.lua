@@ -9,19 +9,14 @@ vim.o.expandtab = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.listchars = "tab:⇥ ,trail:·"
-vim.o.softtabstop = 2
-vim.o.mouse = "a"
+vim.o.mouse = ""
 vim.o.clipboard = "unnamedplus"
 vim.o.laststatus = 0
 vim.o.winborder = "none"
-
-vim.bo.smartindent = true
-vim.bo.swapfile = false
-
-vim.wo.number = true
-vim.wo.relativenumber = false
-vim.wo.signcolumn = "yes"
-vim.wo.wrap = true
+vim.o.smartindent = true
+vim.o.swapfile = false
+vim.o.number = true
+vim.o.signcolumn = "yes"
 
 -- Disable unused providers
 vim.g.loaded_node_provider = 0

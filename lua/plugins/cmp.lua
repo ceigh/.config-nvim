@@ -19,7 +19,7 @@ return {
 
 	config = function()
 		local cmp = require("cmp")
-		local cmp_window_opts = { scrollbar = false }
+		-- local cmp_window_opts = { scrollbar = false }
 
 		-- check if in start tag
 		local function is_in_start_tag()

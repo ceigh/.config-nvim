@@ -1,12 +1,7 @@
--- local home = os.getenv("HOME") .. "/"
--- local bun_path = home .. ".bun/"
 local brew_path = "/opt/homebrew/"
 
 return {
 	paths = {
-		-- bun = bun_path,
-		-- bun_modules = bun_path .. "install/global/node_modules/",
-		-- brew = brew_path,
 		brew_bin = brew_path .. "bin",
 	},
 
