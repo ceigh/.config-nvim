@@ -1,5 +1,3 @@
-local map_key = require("utils").map_key
-
 return {
 	"https://github.com/lewis6991/gitsigns.nvim",
 	event = "VeryLazy",
@@ -13,14 +11,15 @@ return {
 			local gitsigns = require("gitsigns")
 
 			-- Nav
-			map_key("]g", function()
+			vim.keymap.set("n", "]g", function()
 				if vim.wo.diff then
 					vim.cmd.normal({ "]g", bang = true })
 				else
 					gitsigns.nav_hunk("next")
 				end
 			end)
-			map_key("[g", function()
+
+			vim.keymap.set("n", "[g", function()
 				if vim.wo.diff then
 					vim.cmd.normal({ "[g", bang = true })
 				else
@@ -29,11 +28,13 @@ return {
 			end)
 
 			-- Hunks
-			map_key("<leader>hr", gitsigns.reset_hunk)
-			map_key("<leader>hr", function()
+			vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk)
+
+			vim.keymap.set("v", "<leader>hr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-			end, "v")
-			map_key("<leader>hp", gitsigns.preview_hunk)
+			end)
+
+			vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk)
 		end,
 	},
 }

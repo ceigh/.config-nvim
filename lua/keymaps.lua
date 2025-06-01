@@ -1,14 +1,10 @@
-local map_key = require("utils").map_key
-
 vim.g.mapleader = ","
 
-map_key(";", ":nohlsearch<CR>")
-map_key("<leader>l", ":Lazy<CR>")
-map_key("<leader>t", ":'<,'>!typograf --stdin --html-entity-type name --html-entity-only-invisible --no-color<CR>", "v")
-map_key("<leader>m", ":MarkdownPreviewToggle<CR>")
-
-map_key("<up>", "<nop>", "")
-map_key("<down>", "<nop>", "")
-map_key("<left>", "<nop>", "")
-map_key("<right>", "<nop>", "")
-map_key("q", "<nop>", "")
+vim.keymap.set("n", ";", ":nohlsearch<CR>")
+vim.keymap.set("n", "<leader>l", ":Lazy<CR>")
+vim.keymap.set(
+	"v",
+	"<leader>t",
+	":'<,'>!typograf --stdin --html-entity-type name --html-entity-only-invisible --no-color<CR>"
+)
+vim.keymap.set("n", "<leader>m", ":MarkdownPreviewToggle<CR>")
