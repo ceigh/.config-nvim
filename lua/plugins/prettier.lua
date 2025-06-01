@@ -22,7 +22,7 @@ return {
 	ft = ft,
 
 	config = function()
-		local fmt_on_save = require("utils").lsp.fmt_on_save
+		local fmt_on_save = require("utils").fmt_on_save
 
 		require("null-ls").setup({
 			on_attach = function(_, bufnr)

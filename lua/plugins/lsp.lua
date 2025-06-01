@@ -5,11 +5,10 @@ return {
 	config = function()
 		local lspconfig = require("lspconfig")
 		local utils = require("utils")
-		local paths = utils.paths
 
 		-- Helpers
 
-		local fmt_on_save = utils.lsp.fmt_on_save
+		local fmt_on_save = utils.fmt_on_save
 
 		local function disable_fmt(client)
 			client.server_capabilities.documentFormattingProvider = false
@@ -154,7 +153,7 @@ return {
 		-- lspconfig.gopls.setup({})
 
 		lspconfig.elixirls.setup({
-			cmd = { paths.brew_bin .. "/elixir-ls" },
+			cmd = { "/opt/homebrew/bin/elixir-ls" },
 		})
 
 		-- Appearance
