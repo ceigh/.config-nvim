@@ -1,20 +1,28 @@
 return {
-	"https://github.com/terrortylor/nvim-comment",
-	dependencies = {
-		"JoosepAlviste/nvim-ts-context-commentstring",
-	},
+	"https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
+
 	keys = {
-		{ "<leader>cc", ":CommentToggle<CR>", silent = true },
-		{ "<leader>c", ":'<,'>CommentToggle<CR>", mode = "v", silent = true },
+		{ "<leader>c", "gc", mode = "v", remap = true },
+		{ "<leader>cc", "gcc", mode = "n", remap = true },
 	},
-	main = "nvim_comment",
 
-	opts = {
-		comment_empty = false,
-		create_mappings = false,
+	config = function()
+		local commentstring = require("ts_context_commentstring")
 
-		hook = function()
-			require("ts_context_commentstring.internal").update_commentstring()
-		end,
-	},
+		commentstring.setup({
+			enable_autocmd = false,
+		})
+
+		------------------------------------------------
+		-- Setup for use with native neovim commenting -
+		------------------------------------------------
+
+		local get_option = vim.filetype.get_option
+
+		---@diagnostic disable-next-line: duplicate-set-field
+		vim.filetype.get_option = function(filetype, option)
+			return option == "commentstring" and require("ts_context_commentstring.internal").calculate_commentstring()
+				or get_option(filetype, option)
+		end
+	end,
 }
