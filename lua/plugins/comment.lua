@@ -13,9 +13,9 @@ return {
 			enable_autocmd = false,
 		})
 
-		------------------------------------------------
-		-- Setup for use with native neovim commenting -
-		------------------------------------------------
+		-------------------------------------------------
+		-- Setup for use with native neovim commenting --
+		-------------------------------------------------
 
 		local get_option = vim.filetype.get_option
 
