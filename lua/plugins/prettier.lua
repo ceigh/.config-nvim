@@ -19,7 +19,6 @@ return {
 	dependencies = {
 		"https://github.com/jose-elias-alvarez/null-ls.nvim",
 	},
-	event = "BufWritePre",
 	ft = ft,
 
 	config = function()

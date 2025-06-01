@@ -1,9 +1,11 @@
 return {
 	"https://github.com/cormacrelf/dark-notify",
-	event = "VeryLazy",
 	lazy = false,
-	priority = 900,
+	priority = 995,
+
 	config = function()
+		vim.cmd("colorscheme github_dark_high_contrast")
+
 		require("dark_notify").run({
 			schemes = {
 				light = "github_light_high_contrast",
