@@ -17,7 +17,7 @@ return {
 
 		-- Default config
 		lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
 			on_attach = function(_, bufnr)
 				fmt_on_save(bufnr)
 			end,
@@ -182,5 +182,35 @@ return {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 		vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+
+		------------------------
+		-- Native completions --
+		------------------------
+
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(event)
+				local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+				if client ~= nil then
+					if client:supports_method("textDocument/completion") then
+						vim.lsp.completion.enable(true, client.id, event.buf, {
+							autotrigger = true,
+						})
+					end
+				end
+			end,
+		})
+
+		vim.keymap.set("i", "<C-z>", function()
+			vim.lsp.completion.get()
+		end)
+
+		vim.keymap.set("i", "<Tab>", function()
+			return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+		end, { expr = true })
+
+		vim.keymap.set("i", "<S-Tab>", function()
+			return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+		end, { expr = true })
 	end,
 }
