@@ -17,7 +17,7 @@ return {
 
 	"https://github.com/MunifTanjim/prettier.nvim",
 	dependencies = {
-		"jose-elias-alvarez/null-ls.nvim",
+		"https://github.com/jose-elias-alvarez/null-ls.nvim",
 	},
 	event = "BufWritePre",
 	ft = ft,

@@ -2,18 +2,12 @@ return {
 	"https://github.com/hrsh7th/nvim-cmp",
 	dependencies = {
 		{
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"dcampos/nvim-snippy",
-			"dcampos/cmp-snippy",
+			"https://github.com/hrsh7th/cmp-nvim-lsp",
+			"https://github.com/hrsh7th/cmp-buffer",
+			"https://github.com/hrsh7th/cmp-path",
+			"https://github.com/dcampos/nvim-snippy",
+			"https://github.com/dcampos/cmp-snippy",
 		},
-		-- {
-		-- 	"Exafunction/codeium.nvim",
-		-- 	dependencies = {
-		-- 		"nvim-lua/plenary.nvim",
-		-- 	},
-		-- },
 	},
 	event = "InsertEnter",
 

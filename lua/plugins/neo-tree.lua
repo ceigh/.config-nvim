@@ -2,8 +2,8 @@ return {
 	"https://github.com/nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"MunifTanjim/nui.nvim",
+		"https://github.com/nvim-lua/plenary.nvim",
+		"https://github.com/MunifTanjim/nui.nvim",
 	},
 	keys = {
 		{ "\\", ":Neotree reveal float toggle<CR>", silent = true },
