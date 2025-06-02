@@ -1,5 +1,5 @@
 return {
-	enabled = false,
+	-- enabled = false,
 	"https://github.com/hrsh7th/nvim-cmp",
 	dependencies = {
 		{

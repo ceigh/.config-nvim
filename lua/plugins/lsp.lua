@@ -187,30 +187,30 @@ return {
 		-- Native completions --
 		------------------------
 
-		vim.api.nvim_create_autocmd("LspAttach", {
-			callback = function(event)
-				local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-				if client ~= nil then
-					if client:supports_method("textDocument/completion") then
-						vim.lsp.completion.enable(true, client.id, event.buf, {
-							autotrigger = true,
-						})
-					end
-				end
-			end,
-		})
-
-		vim.keymap.set("i", "<C-z>", function()
-			vim.lsp.completion.get()
-		end)
-
-		vim.keymap.set("i", "<Tab>", function()
-			return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-		end, { expr = true })
-
-		vim.keymap.set("i", "<S-Tab>", function()
-			return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
-		end, { expr = true })
+		-- vim.api.nvim_create_autocmd("LspAttach", {
+		-- 	callback = function(event)
+		-- 		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		--
+		-- 		if client ~= nil then
+		-- 			if client:supports_method("textDocument/completion") then
+		-- 				vim.lsp.completion.enable(true, client.id, event.buf, {
+		-- 					autotrigger = true,
+		-- 				})
+		-- 			end
+		-- 		end
+		-- 	end,
+		-- })
+		--
+		-- vim.keymap.set("i", "<C-z>", function()
+		-- 	vim.lsp.completion.get()
+		-- end)
+		--
+		-- vim.keymap.set("i", "<Tab>", function()
+		-- 	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
+		-- end, { expr = true })
+		--
+		-- vim.keymap.set("i", "<S-Tab>", function()
+		-- 	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
+		-- end, { expr = true })
 	end,
 }
