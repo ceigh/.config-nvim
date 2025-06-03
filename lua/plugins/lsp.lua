@@ -66,9 +66,7 @@ return {
 
 				callback = callback or function()
 					if client.supports_method("textDocument/formatting") then
-						vim.lsp.buf.format({
-							async = true,
-						})
+						vim.lsp.buf.format()
 					end
 				end,
 			})

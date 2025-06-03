@@ -3,14 +3,9 @@ return {
 	event = "VeryLazy",
 
 	opts = {
-		preview_config = {
-			border = "none",
-		},
-
 		on_attach = function()
 			local gitsigns = require("gitsigns")
 
-			-- Nav
 			vim.keymap.set("n", "]g", function()
 				if vim.wo.diff then
 					vim.cmd.normal({ "]g", bang = true })
@@ -27,7 +22,6 @@ return {
 				end
 			end)
 
-			-- Hunks
 			vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk)
 
 			vim.keymap.set("v", "<leader>hr", function()

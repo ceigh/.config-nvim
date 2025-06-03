@@ -7,7 +7,6 @@ return {
 		require("nvim-treesitter.configs").setup({
 			modules = {},
 			highlight = { enable = true },
-			indent = { enable = true },
 			sync_install = false,
 			auto_install = true,
 			ignore_install = {},
@@ -34,7 +33,7 @@ return {
 				"vim",
 				"vue",
 				"yaml",
-				"gleam",
+				-- "gleam",
 			},
 		})
 	end,
