@@ -1,5 +1,6 @@
 return {
 	"https://github.com/neovim/nvim-lspconfig",
+	version = "^2.2.0",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"https://github.com/nvimtools/none-ls.nvim",

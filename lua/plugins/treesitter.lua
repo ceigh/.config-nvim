@@ -1,5 +1,6 @@
 return {
 	"https://github.com/nvim-treesitter/nvim-treesitter",
+	version = "^0.10.0",
 	event = "VeryLazy",
 	build = ":TSUpdate",
 

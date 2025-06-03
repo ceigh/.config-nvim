@@ -1,6 +1,6 @@
 return {
 	"https://github.com/nvim-neo-tree/neo-tree.nvim",
-	branch = "v3.x",
+	version = "^3.33.0",
 	dependencies = {
 		"https://github.com/nvim-lua/plenary.nvim",
 		"https://github.com/MunifTanjim/nui.nvim",

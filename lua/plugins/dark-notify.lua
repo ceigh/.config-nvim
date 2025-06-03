@@ -1,5 +1,6 @@
 return {
 	"https://github.com/cormacrelf/dark-notify",
+	version = "^0.1.2",
 	lazy = false,
 	priority = 995,
 

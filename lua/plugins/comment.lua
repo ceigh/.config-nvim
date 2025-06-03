@@ -1,6 +1,5 @@
 return {
 	"https://github.com/JoosepAlviste/nvim-ts-context-commentstring",
-
 	keys = {
 		{ "<leader>c", "gc", mode = "v", remap = true },
 		{ "<leader>cc", "gcc", mode = "n", remap = true },

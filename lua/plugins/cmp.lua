@@ -1,6 +1,6 @@
 return {
-	-- enabled = false,
 	"https://github.com/hrsh7th/nvim-cmp",
+	version = "^0.0.2",
 	dependencies = {
 		{
 			"https://github.com/hrsh7th/cmp-nvim-lsp",

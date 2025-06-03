@@ -1,5 +1,6 @@
 return {
 	"https://github.com/lewis6991/gitsigns.nvim",
+	version = "^1.0.2",
 	event = "VeryLazy",
 
 	opts = {

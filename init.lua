@@ -68,7 +68,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
 	change_detection = { notify = false },
 	ui = {
-		border = "none",
 		icons = {
 			cmd = "",
 			config = "",
