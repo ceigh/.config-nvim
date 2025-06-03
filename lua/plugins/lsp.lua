@@ -3,6 +3,14 @@ return {
 	version = "^2.2.0",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
+		{
+			"https://github.com/mason-org/mason-lspconfig.nvim",
+			version = "^2.0.0",
+			dependencies = {
+				"https://github.com/mason-org/mason.nvim",
+				version = "^2.0.0",
+			},
+		},
 		"https://github.com/nvimtools/none-ls.nvim",
 		"https://github.com/MunifTanjim/prettier.nvim",
 	},
@@ -203,8 +211,35 @@ return {
 			settings = { Lua = {} },
 		})
 
-		vim.lsp.config("elixirls", {
-			cmd = { "/opt/homebrew/bin/elixir-ls" },
+    ----------------------
+    -- Install binaries --
+    ----------------------
+
+		require("mason").setup()
+
+		require("mason-lspconfig").setup({
+			automatic_enable = false,
+			ensure_installed = {
+        "eslint",
+        "oxlint",
+				"stylelint_lsp",
+				"graphql",
+				"lua_ls",
+			},
+		})
+
+		------------
+		-- Enable --
+		------------
+
+		vim.lsp.enable({
+			"eslint",
+			"oxlint",
+			"stylelint_lsp",
+			"graphql",
+			"lua_ls",
+			"vue_ls",
+			"stylua3p_ls",
 		})
 
 		------------
@@ -232,22 +267,6 @@ return {
 				"graphql",
 				"markdown",
 			},
-		})
-
-		------------
-		-- Enable --
-		------------
-
-		vim.lsp.enable({
-			"eslint",
-			"oxlint",
-			"stylelint_lsp",
-			"vue_ls",
-			"graphql",
-			"lua_ls",
-			"stylua3p_ls",
-			-- "gopls",
-			-- "elixirls",
 		})
 	end,
 }
