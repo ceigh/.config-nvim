@@ -1,187 +1,30 @@
 return {
 	"https://github.com/neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"https://github.com/nvimtools/none-ls.nvim",
+		"https://github.com/MunifTanjim/prettier.nvim",
+	},
 
 	config = function()
-		local lspconfig = require("lspconfig")
-		local utils = require("utils")
+		----------------
+		-- Appearance --
+		----------------
 
-		-- Helpers
-
-		local fmt_on_save = utils.fmt_on_save
-
-		local function disable_fmt(client)
-			client.server_capabilities.documentFormattingProvider = false
-			client.server_capabilities.documentRangeFormattingProvider = false
-		end
-
-		-- Default config
-		lspconfig.util.default_config = vim.tbl_deep_extend("force", lspconfig.util.default_config, {
-			-- capabilities = require("cmp_nvim_lsp").default_capabilities(),
-			on_attach = function(_, bufnr)
-				fmt_on_save(bufnr)
-			end,
-		})
-		lspconfig.util.default_config.capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
-
-		-- Configurations
-
-		lspconfig.volar.setup({
-			on_attach = function(client)
-				disable_fmt(client)
-			end,
-			filetypes = {
-				"javascript",
-				"typescript",
-				"vue",
-				"css",
-				"scss",
-			},
-			init_options = {
-				vue = {
-					hybridMode = false,
-				},
-			},
-		})
-
-		lspconfig.eslint.setup({
-			on_attach = function(_, bufnr)
-				fmt_on_save(bufnr, function()
-					vim.cmd("EslintFixAll")
-				end)
-			end,
-			filetypes = {
-				"javascript",
-				"typescript",
-				"vue",
-
-				-- "html",
-				-- "markdown",
-				-- "json",
-				-- "jsonc",
-				-- "yaml",
-				-- "toml",
-				-- "xml",
-				-- "gql",
-				-- "graphql",
-				-- "css",
-				-- "scss",
-			},
-			-- settings = {
-			-- 	-- Silent the stylistic rules in you IDE, but still auto fix them
-			-- 	rulesCustomizations = {
-			-- 		{ rule = "style/*", severity = "off", fixable = true },
-			-- 		{ rule = "format/*", severity = "off", fixable = true },
-			-- 		{ rule = "*-indent", severity = "off", fixable = true },
-			-- 		{ rule = "*-spacing", severity = "off", fixable = true },
-			-- 		{ rule = "*-spaces", severity = "off", fixable = true },
-			-- 		{ rule = "*-order", severity = "off", fixable = true },
-			-- 		{ rule = "*-dangle", severity = "off", fixable = true },
-			-- 		{ rule = "*-newline", severity = "off", fixable = true },
-			-- 		{ rule = "*quotes", severity = "off", fixable = true },
-			-- 		{ rule = "*semi", severity = "off", fixable = true },
-			-- 	},
-			-- },
-		})
-
-		lspconfig.oxlint.setup({
-			on_attach = function(_, bufnr)
-				fmt_on_save(bufnr, function()
-					vim.cmd("OxcFixAll")
-				end)
-			end,
-			filetypes = {
-				"javascript",
-				"typescript",
-				"vue",
-			},
-			settings = {
-				single_file_support = true,
-			},
-		})
-
-		lspconfig.stylelint_lsp.setup({
-			settings = {
-				stylelintplus = {
-					autoFixOnFormat = true,
-				},
-			},
-			filetypes = {
-				"css",
-				"scss",
-				"vue",
-			},
-		})
-
-		require("lspconfig").lua_ls.setup({
-			on_attach = function(client, bufnr)
-				disable_fmt(client)
-				fmt_on_save(bufnr, function()
-					require("stylua-nvim").format_file()
-				end)
-			end,
-
-			on_init = function(client)
-				local path = client.workspace_folders[1].name
-				---@diagnostic disable-next-line: undefined-field
-				if
-					---@diagnostic disable-next-line: undefined-field
-					vim.loop.fs_stat(path .. "/.luarc.json")
-					---@diagnostic disable-next-line: undefined-field
-					or vim.loop.fs_stat(path .. "/.luarc.jsonc")
-				then
-					return
-				end
-
-				client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-					runtime = { version = "LuaJIT" },
-					-- Make the server aware of Neovim runtime files
-					workspace = {
-						checkThirdParty = false,
-						library = { vim.env.VIMRUNTIME },
-					},
-				})
-			end,
-
-			settings = { Lua = {} },
-		})
-
-		lspconfig.graphql.setup({})
-
-		-- lspconfig.gleam.setup({})
-
-		-- lspconfig.gopls.setup({})
-
-		lspconfig.elixirls.setup({
-			cmd = { "/opt/homebrew/bin/elixir-ls" },
-		})
-
-		-- Appearance
-
-		-- LSP
 		vim.diagnostic.config({
-			virtual_text = false,
-			update_in_insert = false,
-			float = {
-				border = "none",
-				max_width = 60,
+			-- Show float on diagnostic navigation
+			jump = {
+				float = true,
 			},
 		})
 
-		-- Hover window opts
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "none",
-			max_width = 60,
-		})
+		-------------
+		-- Keymaps --
+		-------------
 
-		-- Hotkeys
-		vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-		vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 		vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-		vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 		------------------------
 		-- Native completions --
@@ -212,5 +55,200 @@ return {
 		-- vim.keymap.set("i", "<S-Tab>", function()
 		-- 	return vim.fn.pumvisible() == 1 and "<C-p>" or "<S-Tab>"
 		-- end, { expr = true })
+
+		-------------
+		-- Helpers --
+		-------------
+
+		local function fmt_on_save(client, buffer, callback)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = buffer,
+
+				callback = callback or function()
+					if client.supports_method("textDocument/formatting") then
+						vim.lsp.buf.format({
+							async = true,
+						})
+					end
+				end,
+			})
+		end
+
+		local function disable_builtin_fmt(client)
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+		end
+
+		--------------------
+		-- Configurations --
+		--------------------
+
+		-- Default config
+		vim.lsp.config("*", {
+			on_attach = function(client, buffer)
+				fmt_on_save(client, buffer)
+			end,
+		})
+
+		-- Provides LspEslintFixAll
+		local eslint_on_attach = vim.lsp.config.eslint.on_attach
+
+		vim.lsp.config("eslint", {
+			on_attach = function(client, buffer)
+				if not eslint_on_attach then
+					return
+				end
+
+				eslint_on_attach(client, buffer)
+
+				fmt_on_save(client, buffer, function()
+					vim.cmd("LspEslintFixAll")
+				end)
+			end,
+		})
+
+		vim.lsp.config("oxlint", {
+			on_attach = function(client, buffer)
+				-- Getting back missing autofix function after 0.11 migration
+				-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/oxlint.lua#L20
+				fmt_on_save(client, buffer, function()
+					-- local client = vim.lsp.get_clients({
+					-- 	bufnr = 0,
+					-- 	name = "oxlint",
+					-- })[1]
+
+					-- if client == nil then
+					-- 	return
+					-- end
+
+					---@diagnostic disable-next-line: param-type-mismatch
+					client.request("workspace/executeCommand", {
+						command = "oxc.fixAll",
+						arguments = { { uri = vim.uri_from_bufnr(0) } },
+						---@diagnostic disable-next-line: param-type-mismatch
+					}, nil, 0)
+				end)
+			end,
+
+			filetypes = {
+				"javascript",
+				"typescript",
+				"vue",
+			},
+		})
+
+		vim.lsp.config("stylelint_lsp", {
+			settings = {
+				stylelintplus = {
+					autoFixOnFormat = true,
+				},
+			},
+		})
+
+		vim.lsp.config("vue_ls", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
+			filetypes = {
+				"javascript",
+				"typescript",
+				"vue",
+				"css",
+				"scss",
+			},
+			init_options = {
+				vue = {
+					hybridMode = false,
+				},
+			},
+		})
+
+		vim.lsp.config("lua_ls", {
+			on_attach = function(client, _)
+				disable_builtin_fmt(client)
+			end,
+
+			on_init = function(client)
+				if client.workspace_folders then
+					local path = client.workspace_folders[1].name
+
+					if
+						path ~= vim.fn.stdpath("config")
+						---@diagnostic disable-next-line: undefined-field
+						and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+					then
+						return
+					end
+				end
+
+				client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+					runtime = {
+						-- Tell the language server which version of Lua you're using
+						-- (most likely LuaJIT in the case of Neovim)
+						version = "LuaJIT",
+						-- Tell the language server how to find Lua modules same way as
+						-- Neovim (see `:h lua-module-load`)
+						path = {
+							"lua/?.lua",
+							"lua/?/init.lua",
+						},
+					},
+					-- Make the server aware of Neovim runtime files
+					workspace = {
+						checkThirdParty = false,
+						library = { vim.env.VIMRUNTIME },
+					},
+				})
+			end,
+
+			settings = { Lua = {} },
+		})
+
+		vim.lsp.config("elixirls", {
+			cmd = { "/opt/homebrew/bin/elixir-ls" },
+		})
+
+		------------
+		-- Custom --
+		------------
+
+		require("null-ls").setup({
+			on_attach = function(client, buffer)
+				fmt_on_save(client, buffer)
+			end,
+		})
+
+		require("prettier").setup({
+			bin = "prettierd",
+			filetypes = {
+				"html",
+				"vue",
+				"css",
+				"scss",
+				"typescript",
+				"javascript",
+				"json",
+				"jsonc",
+				"yaml",
+				"graphql",
+				"markdown",
+			},
+		})
+
+		------------
+		-- Enable --
+		------------
+
+		vim.lsp.enable({
+			"eslint",
+			"oxlint",
+			"stylelint_lsp",
+			"vue_ls",
+			"graphql",
+			"lua_ls",
+			"stylua3p_ls",
+			-- "gopls",
+			-- "elixirls",
+		})
 	end,
 }
