@@ -211,17 +211,17 @@ return {
 			settings = { Lua = {} },
 		})
 
-    ----------------------
-    -- Install binaries --
-    ----------------------
+		----------------------
+		-- Install binaries --
+		----------------------
 
 		require("mason").setup()
 
 		require("mason-lspconfig").setup({
 			automatic_enable = false,
 			ensure_installed = {
-        "eslint",
-        "oxlint",
+				"eslint",
+				"oxlint",
 				"stylelint_lsp",
 				"graphql",
 				"lua_ls",
