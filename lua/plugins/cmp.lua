@@ -6,17 +6,30 @@ return {
 			"https://github.com/hrsh7th/cmp-nvim-lsp",
 			"https://github.com/hrsh7th/cmp-buffer",
 			"https://github.com/hrsh7th/cmp-path",
-			{
-				"https://github.com/dcampos/nvim-snippy",
-				version = "^1.0.0",
-			},
-			"https://github.com/dcampos/cmp-snippy",
 		},
 	},
 	event = "InsertEnter",
 
 	config = function()
 		local cmp = require("cmp")
+
+		-- Register snippets
+		cmp.register_source("snippets", {
+			complete = function(_, _, callback)
+				local items = {}
+
+				for _, snip in ipairs(require("snippets")) do
+					table.insert(items, {
+						label = snip.prefix,
+						documentation = snip.body,
+						kind = cmp.lsp.CompletionItemKind.Snippet,
+						insertText = snip.body,
+					})
+				end
+
+				callback(items)
+			end,
+		})
 
 		cmp.setup({
 			formatting = {
@@ -34,7 +47,7 @@ return {
 
 			snippet = {
 				expand = function(args)
-					require("snippy").expand_snippet(args.body)
+					vim.snippet.expand(args.body)
 				end,
 			},
 
@@ -50,7 +63,7 @@ return {
 				{ name = "nvim_lsp" },
 				{ name = "buffer" },
 				{ name = "path" },
-				{ name = "snippy" },
+				{ name = "snippets" },
 			}),
 		})
 	end,
