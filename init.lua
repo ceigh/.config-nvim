@@ -40,7 +40,6 @@ vim.keymap.set(
 	"<leader>t",
 	":'<,'>!typograf --stdin --html-entity-type name --html-entity-only-invisible --no-color<CR>"
 )
-vim.keymap.set("n", "<leader>m", ":MarkdownPreviewToggle<CR>")
 
 vim.keymap.set("n", "q", "<Nop>")
 
