@@ -112,6 +112,21 @@ return {
 					vim.cmd("LspEslintFixAll")
 				end)
 			end,
+			filetypes = {
+				"javascript",
+				"typescript",
+				"vue",
+
+				"html",
+				"markdown",
+				"json",
+				"jsonc",
+				"yaml",
+				"gql",
+				"graphql",
+				"css",
+				"scss",
+			},
 		})
 
 		vim.lsp.config("oxlint", {
