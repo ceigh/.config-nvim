@@ -30,6 +30,13 @@ return {
 			end)
 
 			vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk)
+
+			-- Remove when winborder support appears
+			gitsigns.setup({
+				preview_config = {
+					border = "none",
+				},
+			})
 		end,
 	},
 }
