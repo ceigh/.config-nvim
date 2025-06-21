@@ -23,7 +23,7 @@
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "prettier.nvim": { "branch": "main", "commit": "ca6452de1accc68a1062e72f58679caa488b501a" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
-  "template-literal-comments.nvim": { "branch": "main", "commit": "8c5d947d07468b8f7eaff6f0f005159b791ade1b" },
+  "template-literal-comments.nvim": { "branch": "main", "commit": "9640cf73a77090a3d044c19766831e6401442095" },
   "trim.nvim": { "branch": "master", "commit": "4fe47a46c02a58894ded8328ca81f6c214a892f5" },
   "vim-lastplace": { "branch": "master", "commit": "563a6ffdbeb9d32951de1f1f3702cb412a17936e" }
 }
