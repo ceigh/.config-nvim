@@ -60,7 +60,7 @@ return {
 			}),
 
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp", trigger_characters = { "-" } },
 			}, {
 				{ name = "buffer" },
 				{ name = "path" },
