@@ -11,6 +11,7 @@ return {
 				version = "^2.0.0",
 			},
 		},
+		"https://github.com/b0o/SchemaStore.nvim",
 		"https://github.com/nvimtools/none-ls.nvim",
 		"https://github.com/MunifTanjim/prettier.nvim",
 	},
@@ -117,15 +118,15 @@ return {
 				"typescript",
 				"vue",
 
-				"html",
-				"markdown",
-				"json",
-				"jsonc",
-				"yaml",
-				"gql",
-				"graphql",
-				"css",
-				"scss",
+				-- "html",
+				-- "markdown",
+				-- "json",
+				-- "jsonc",
+				-- "yaml",
+				-- "gql",
+				-- "graphql",
+				-- "css",
+				-- "scss",
 			},
 		})
 
@@ -181,6 +182,30 @@ return {
 			init_options = {
 				vue = {
 					hybridMode = false,
+				},
+			},
+		})
+
+		vim.lsp.config("jsonls", {
+			settings = {
+				json = {
+					schemas = require("schemastore").json.schemas(),
+					validate = { enable = true },
+				},
+			},
+		})
+
+		vim.lsp.config("yamlls", {
+			settings = {
+				yaml = {
+					schemas = require("schemastore").yaml.schemas(),
+					schemaStore = {
+						-- To use schemaStore plugin
+						enable = false,
+						-- Avoid TypeError: Cannot read properties of undefined
+						-- (reading 'length')
+						url = "",
+					},
 				},
 			},
 		})
@@ -241,6 +266,8 @@ return {
 				"unocss",
 				"graphql",
 				"lua_ls",
+				"jsonls",
+				"yamlls",
 			},
 		})
 
@@ -257,6 +284,8 @@ return {
 			"lua_ls",
 			"vue_ls",
 			"stylua3p_ls",
+			"jsonls",
+			"yamlls",
 		})
 
 		------------
