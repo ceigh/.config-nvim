@@ -168,6 +168,14 @@ return {
 			},
 		})
 
+		vim.lsp.config("tailwindcss", {
+			settings = {
+				tailwindCSS = {
+					classFunctions = { "cva", "cx" },
+				},
+			},
+		})
+
 		vim.lsp.config("vue_ls", {
 			on_attach = function(client)
 				disable_builtin_fmt(client)
@@ -269,6 +277,7 @@ return {
 				"jsonls",
 				"yamlls",
 				"taplo",
+				"tailwindcss",
 			},
 		})
 
@@ -288,6 +297,7 @@ return {
 			"jsonls",
 			"yamlls",
 			"taplo",
+			"tailwindcss",
 		})
 
 		------------
