@@ -268,6 +268,7 @@ return {
 				"lua_ls",
 				"jsonls",
 				"yamlls",
+				"taplo",
 			},
 		})
 
@@ -286,6 +287,7 @@ return {
 			"stylua3p_ls",
 			"jsonls",
 			"yamlls",
+			"taplo",
 		})
 
 		------------
