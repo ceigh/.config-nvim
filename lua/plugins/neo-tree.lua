@@ -39,6 +39,25 @@ return {
 		},
 
 		filesystem = {
+			filtered_items = {
+				never_show = {
+					".DS_Store",
+					".git",
+					"node_modules",
+					"package-lock.json",
+					"yarn.lock",
+					"bun.lock",
+					"bun.lockb",
+					".nuxt",
+					".output",
+					"dist",
+					"tsconfig.tsbuildinfo",
+				},
+				never_show_by_pattern = {
+					".*.bun-build",
+				},
+			},
+
 			window = {
 				mappings = {
 					-- Trash files instead of rm (lifesaver!)
