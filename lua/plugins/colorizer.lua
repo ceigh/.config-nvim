@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"https://github.com/norcalli/nvim-colorizer.lua",
 	event = "VeryLazy",
 
