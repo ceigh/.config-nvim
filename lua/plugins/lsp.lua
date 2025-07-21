@@ -9,6 +9,9 @@ return {
 			dependencies = {
 				"https://github.com/mason-org/mason.nvim",
 				version = "^2.0.0",
+				keys = {
+					{ "<leader>M", ":Mason<CR>", silent = true },
+				},
 			},
 		},
 		"https://github.com/b0o/SchemaStore.nvim",
@@ -171,7 +174,7 @@ return {
 		vim.lsp.config("tailwindcss", {
 			settings = {
 				tailwindCSS = {
-					classFunctions = { "cva", "cx" },
+					classFunctions = { "cva" },
 				},
 			},
 		})
@@ -278,6 +281,8 @@ return {
 				"yamlls",
 				"taplo",
 				"tailwindcss",
+				"prismals",
+				"bashls",
 			},
 		})
 
@@ -298,6 +303,8 @@ return {
 			"yamlls",
 			"taplo",
 			"tailwindcss",
+			"prismals",
+			"bashls",
 		})
 
 		------------

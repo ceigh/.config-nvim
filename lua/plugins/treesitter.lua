@@ -35,6 +35,7 @@ return {
 				"vue",
 				"yaml",
 				-- "gleam",
+				"prisma",
 			},
 		})
 	end,
