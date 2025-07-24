@@ -37,7 +37,16 @@ return {
 
 		vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action)
 		vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+
+		vim.keymap.set("n", "gd", function()
+			vim.cmd("tab split")
+			vim.lsp.buf.definition()
+		end)
+
+		vim.keymap.set("n", "gi", function()
+			vim.cmd("tab split")
+			vim.lsp.buf.implementation()
+		end)
 
 		------------------------
 		-- Native completions --
