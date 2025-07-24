@@ -1,6 +1,7 @@
 return {
 	"https://github.com/neovim/nvim-lspconfig",
-	version = "^2.2.0",
+	-- TODO: uncomment after new vue_ls cfg released
+	-- version = "^2.2.0",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
@@ -188,22 +189,37 @@ return {
 			},
 		})
 
+		-- https://github.com/vuejs/language-tools/wiki/Neovim
+
+		vim.lsp.config("vtsls", {
+			settings = {
+				vtsls = {
+					tsserver = {
+						globalPlugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = vim.fn.stdpath("data")
+									.. "/mason/packages"
+									.. "/vue-language-server/node_modules/@vue/language-server",
+								languages = { "vue" },
+								configNamespace = "typescript",
+							},
+						},
+					},
+				},
+			},
+
+			filetypes = {
+				"typescript",
+				"javascript",
+				"vue",
+			},
+		})
+
 		vim.lsp.config("vue_ls", {
 			on_attach = function(client)
 				disable_builtin_fmt(client)
 			end,
-			filetypes = {
-				"javascript",
-				"typescript",
-				"vue",
-				"css",
-				"scss",
-			},
-			init_options = {
-				vue = {
-					hybridMode = false,
-				},
-			},
 		})
 
 		vim.lsp.config("jsonls", {
@@ -284,6 +300,8 @@ return {
 				"oxlint",
 				"stylelint_lsp",
 				"css_variables",
+				"vtsls",
+				"vue_ls@3.0.0",
 				"unocss",
 				"graphql",
 				"lua_ls",
@@ -308,6 +326,7 @@ return {
 			"unocss",
 			"graphql",
 			"lua_ls",
+			"vtsls",
 			"vue_ls",
 			"stylua3p_ls",
 			"jsonls",
