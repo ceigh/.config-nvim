@@ -60,7 +60,11 @@ return {
 			}),
 
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp", trigger_characters = { "-" } },
+				{
+					name = "nvim_lsp",
+					trigger_characters = { "-" },
+					entry_filter = require("utils/cmp_vue").vue_entry_filter,
+				},
 			}, {
 				{ name = "buffer" },
 				{ name = "path" },
