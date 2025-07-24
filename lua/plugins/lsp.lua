@@ -181,6 +181,14 @@ return {
 			},
 		})
 
+		vim.lsp.config("css_variables", {
+			filetypes = {
+				"css",
+				"scss",
+				"vue",
+			},
+		})
+
 		vim.lsp.config("tailwindcss", {
 			settings = {
 				tailwindCSS = {
