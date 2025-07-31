@@ -116,6 +116,8 @@ return {
 
 		vim.lsp.config("eslint", {
 			on_attach = function(client, buffer)
+				disable_builtin_fmt(client)
+
 				if not eslint_on_attach then
 					return
 				end
@@ -123,9 +125,10 @@ return {
 				eslint_on_attach(client, buffer)
 
 				fmt_on_save(client, buffer, function()
-					vim.cmd("LspEslintFixAll")
+					vim.cmd("silent! LspEslintFixAll")
 				end)
 			end,
+
 			filetypes = {
 				"javascript",
 				"typescript",
@@ -181,18 +184,20 @@ return {
 			},
 		})
 
-		vim.lsp.config("css_variables", {
-			filetypes = {
-				"css",
-				"scss",
-				"vue",
-			},
+		vim.lsp.config("cssls", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
 		})
 
 		vim.lsp.config("tailwindcss", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
+
 			settings = {
 				tailwindCSS = {
-					classFunctions = { "cva" },
+					classFunctions = { "cva", "cn" },
 				},
 			},
 		})
@@ -200,6 +205,10 @@ return {
 		-- https://github.com/vuejs/language-tools/wiki/Neovim
 
 		vim.lsp.config("vtsls", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
+
 			settings = {
 				vtsls = {
 					tsserver = {
@@ -307,16 +316,17 @@ return {
 				"eslint",
 				"oxlint",
 				"stylelint_lsp",
+				"cssls",
 				"css_variables",
+				"unocss",
+				"tailwindcss",
 				"vtsls",
 				"vue_ls@3.0.0",
-				"unocss",
 				"graphql",
 				"lua_ls",
 				"jsonls",
 				"yamlls",
 				"taplo",
-				"tailwindcss",
 				"prismals",
 				"bashls",
 			},
@@ -330,8 +340,10 @@ return {
 			"eslint",
 			"oxlint",
 			"stylelint_lsp",
+			"cssls",
 			"css_variables",
 			"unocss",
+			"tailwindcss",
 			"graphql",
 			"lua_ls",
 			"vtsls",
@@ -340,7 +352,6 @@ return {
 			"jsonls",
 			"yamlls",
 			"taplo",
-			"tailwindcss",
 			"prismals",
 			"bashls",
 		})
