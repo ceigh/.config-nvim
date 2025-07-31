@@ -55,6 +55,7 @@ return {
 				},
 				never_show_by_pattern = {
 					".*.bun-build",
+					".*.dump",
 				},
 			},
 
