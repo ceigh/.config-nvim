@@ -1,7 +1,6 @@
 return {
 	"https://github.com/neovim/nvim-lspconfig",
-	-- TODO: uncomment after new vue_ls cfg released
-	-- version = "^2.2.0",
+	version = "^2.4.0",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
