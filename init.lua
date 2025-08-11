@@ -21,6 +21,7 @@ vim.o.swapfile = false
 vim.o.number = true
 vim.o.signcolumn = "yes"
 vim.o.confirm = true
+vim.opt.textwidth = 0
 
 -- Disable unused providers
 vim.g.loaded_node_provider = 0
