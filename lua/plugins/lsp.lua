@@ -88,7 +88,9 @@ return {
 
 				callback = callback or function()
 					if client.supports_method("textDocument/formatting") then
-						vim.lsp.buf.format()
+						vim.lsp.buf.format({
+							timeout_ms = 15000,
+						})
 					end
 				end,
 			})
@@ -197,6 +199,7 @@ return {
 			settings = {
 				tailwindCSS = {
 					classFunctions = { "cva", "cn" },
+					validate = false,
 				},
 			},
 		})
@@ -337,12 +340,12 @@ return {
 
 		vim.lsp.enable({
 			"eslint",
-			"oxlint",
+			-- "oxlint",
 			"stylelint_lsp",
 			"cssls",
-			"css_variables",
-			"unocss",
-			"tailwindcss",
+			-- "css_variables",
+			-- "unocss",
+			-- "tailwindcss",
 			"graphql",
 			"lua_ls",
 			"vtsls",

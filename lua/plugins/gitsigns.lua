@@ -34,7 +34,7 @@ return {
 			-- Remove when winborder support appears
 			gitsigns.setup({
 				preview_config = {
-					border = "none",
+					border = "rounded",
 				},
 			})
 		end,
