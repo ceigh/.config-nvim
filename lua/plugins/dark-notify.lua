@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	"https://github.com/cormacrelf/dark-notify",
 	version = "^0.1.2",

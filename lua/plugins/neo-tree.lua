@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	"https://github.com/nvim-neo-tree/neo-tree.nvim",
 	version = "^3.33.0",
@@ -9,6 +10,8 @@ return {
 		{ "\\", ":Neotree reveal float toggle<CR>", silent = true },
 	},
 
+	---@module 'neo-tree'
+	---@type neotree.Config
 	opts = {
 		enable_diagnostics = false,
 		popup_border_style = "",
@@ -18,6 +21,8 @@ return {
 				enable_character_fade = false,
 			},
 			icon = {
+				default = "*",
+				folder_empty_open = "-",
 				folder_closed = "+",
 				folder_open = "-",
 				folder_empty = "-",
@@ -63,6 +68,7 @@ return {
 				mappings = {
 					-- Trash files instead of rm (lifesaver!)
 					["d"] = function(state)
+						---@diagnostic disable-next-line: undefined-field
 						local path = state.tree:get_node().path
 						local msg = "Are you sure you want to trash " .. path .. "?"
 

@@ -21,7 +21,7 @@ vim.o.swapfile = false
 vim.o.number = true
 vim.o.signcolumn = "yes"
 vim.o.confirm = true
-vim.opt.textwidth = 0
+vim.o.textwidth = 0
 
 -- Disable unused providers
 vim.g.loaded_node_provider = 0
@@ -52,7 +52,6 @@ vim.keymap.set("n", "q", "<Nop>")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 -- Install Lazy.nvim plugin manager
----@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	vim.fn.system({
 		"git",

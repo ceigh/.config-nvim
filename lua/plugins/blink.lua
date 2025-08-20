@@ -1,8 +1,11 @@
+---@type LazySpec
 return {
 	"https://github.com/saghen/blink.cmp",
 	version = "^1.6.0",
 	event = "InsertEnter",
 
+	---@module 'blink.cmp'
+	---@type blink.cmp.Config
 	opts = {
 		keymap = {
 			preset = "default",
@@ -33,6 +36,24 @@ return {
 						{ "label", "label_description", gap = 1 },
 						{ "kind" },
 					},
+				},
+			},
+		},
+
+		sources = {
+			default = {
+				"lazydev",
+				"lsp",
+				"path",
+				"snippets",
+				"buffer",
+			},
+
+			providers = {
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					score_offset = 100,
 				},
 			},
 		},

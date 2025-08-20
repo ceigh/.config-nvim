@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	"https://github.com/bennypowers/template-literal-comments.nvim",
 	-- version = "^1.0.0",
