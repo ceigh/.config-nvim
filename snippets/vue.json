@@ -1,0 +1,74 @@
+{
+  "setup": {
+    "prefix": "___setup",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    component",
+      "  </div>",
+      "</template>"
+    ]
+  },
+  "setupScss": {
+    "prefix": "___setupScss",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    component",
+      "  </div>",
+      "</template>",
+      "",
+      "<style module lang=\"scss\">",
+      "//",
+      "</style>"
+    ]
+  },
+  "optionsScss": {
+    "prefix": "___optionsScss",
+    "body": [
+      "<script lang=\"ts\">",
+      "import { defineComponent } from 'vue'",
+      "",
+      "export default defineComponent({",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    component",
+      "  </div>",
+      "</template>",
+      "",
+      "<style module lang=\"scss\">",
+      "//",
+      "</style>"
+    ]
+  },
+  "optionsLegacyScss": {
+    "prefix": "___optionsLegacyScss",
+    "body": [
+      "<script lang=\"ts\">",
+      "import Vue from 'vue'",
+      "",
+      "export default Vue.extend({",
+      "})",
+      "</script>",
+      "",
+      "<template>",
+      "  <div>",
+      "    component",
+      "  </div>",
+      "</template>",
+      "",
+      "<style module lang=\"scss\">",
+      "//",
+      "</style>"
+    ]
+  }
+}

@@ -20,7 +20,6 @@ vim.o.smartindent = true
 vim.o.swapfile = false
 vim.o.number = true
 vim.o.signcolumn = "yes"
-vim.o.confirm = true
 vim.o.textwidth = 0
 
 -- Disable unused providers
