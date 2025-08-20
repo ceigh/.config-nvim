@@ -13,15 +13,5 @@ return {
 				},
 			},
 		})
-
-		-- vim.api.nvim_create_autocmd("ColorScheme", {
-		-- 	pattern = "*",
-		-- 	callback = function()
-		-- 		vim.api.nvim_set_hl(0, "FloatBorder", { link = "Whitespace" })
-		-- 		vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { link = "FloatBorder" })
-		-- 		vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { link = "FloatBorder" })
-		-- 		vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { link = "FloatBorder" })
-		-- 	end,
-		-- })
 	end,
 }
