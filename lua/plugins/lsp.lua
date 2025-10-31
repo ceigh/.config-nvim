@@ -136,15 +136,15 @@ return {
 				"typescript",
 				"vue",
 
-				-- "html",
-				-- "markdown",
-				-- "json",
-				-- "jsonc",
-				-- "yaml",
-				-- "gql",
-				-- "graphql",
-				-- "css",
-				-- "scss",
+				"html",
+				"markdown",
+				"json",
+				"jsonc",
+				"yaml",
+				"gql",
+				"graphql",
+				"css",
+				"scss",
 			},
 		})
 
@@ -243,6 +243,10 @@ return {
 		})
 
 		vim.lsp.config("jsonls", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
+
 			settings = {
 				json = {
 					schemas = require("schemastore").json.schemas(),
@@ -252,6 +256,10 @@ return {
 		})
 
 		vim.lsp.config("yamlls", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
+
 			settings = {
 				yaml = {
 					schemas = require("schemastore").yaml.schemas(),
