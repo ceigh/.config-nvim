@@ -55,6 +55,36 @@ return {
 					module = "lazydev.integrations.blink",
 					score_offset = 100,
 				},
+
+				lsp = {
+					transform_items = function(_, items)
+						for _, item in ipairs(items) do
+							-- Remove additionalTextEdits that are type imports
+							if item.additionalTextEdits then
+								item.additionalTextEdits = vim.tbl_filter(function(edit)
+									return not (edit.newText and edit.newText:match("^%s*import%s+type%s+"))
+								end, item.additionalTextEdits)
+								if #item.additionalTextEdits == 0 then
+									item.additionalTextEdits = nil
+								end
+							end
+
+							-- Replace ~/ with @/ in import paths
+							if item.textEdit and item.textEdit.newText then
+								item.textEdit.newText = item.textEdit.newText:gsub("from%s+['\"]~/", "from '@/")
+							end
+
+							if item.additionalTextEdits then
+								for _, edit in ipairs(item.additionalTextEdits) do
+									if edit.newText then
+										edit.newText = edit.newText:gsub("from%s+['\"]~/", "from '@/")
+									end
+								end
+							end
+						end
+						return items
+					end,
+				},
 			},
 		},
 	},
