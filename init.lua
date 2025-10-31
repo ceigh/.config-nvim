@@ -44,6 +44,26 @@ vim.keymap.set(
 
 vim.keymap.set("n", "q", "<Nop>")
 
+---------------------------------------------------
+-- Misspelled :quit command without Shift releasing
+---------------------------------------------------
+
+local quit_commands = {
+	Q = "q",
+	Qa = "qa",
+	QA = "qa",
+	W = "w",
+	Wq = "wq",
+	WQ = "wq",
+	Wqa = "wqa",
+	WQa = "wqa",
+	WQA = "wqa",
+}
+
+for alias, command in pairs(quit_commands) do
+	vim.api.nvim_create_user_command(alias, command, { bang = true })
+end
+
 ------------------
 -- Plugins init --
 ------------------
