@@ -76,22 +76,38 @@ return {
 							-- Filter markdown output
 							if item.documentation then
 								if type(item.documentation) == "string" then
-									item.documentation = utils.filter_markdown_content(item.documentation)
+									item.documentation =
+										utils.filter_markdown_content(
+											item.documentation
+										)
 								elseif type(item.documentation) == "table" then
 									if item.documentation.value then
 										item.documentation.value =
-											utils.filter_markdown_content(item.documentation.value)
+											utils.filter_markdown_content(
+												item.documentation.value
+											)
 									else
-										item.documentation = utils.filter_markdown_content(item.documentation)
+										item.documentation =
+											utils.filter_markdown_content(
+												item.documentation
+											)
 									end
 								end
 							end
 
 							-- Remove additionalTextEdits that are type imports
 							if item.additionalTextEdits then
-								item.additionalTextEdits = vim.tbl_filter(function(edit)
-									return not (edit.newText and edit.newText:match("^%s*import%s+type%s+"))
-								end, item.additionalTextEdits)
+								item.additionalTextEdits = vim.tbl_filter(
+									function(edit)
+										return not (
+											edit.newText
+											and edit.newText:match(
+												"^%s*import%s+type%s+"
+											)
+										)
+									end,
+									item.additionalTextEdits
+								)
 								if #item.additionalTextEdits == 0 then
 									item.additionalTextEdits = nil
 								end
@@ -99,12 +115,19 @@ return {
 
 							-- Replace ~/ with @/ in import paths
 							if item.textEdit and item.textEdit.newText then
-								item.textEdit.newText = item.textEdit.newText:gsub("from%s+['\"]~/", "from '@/")
+								item.textEdit.newText =
+									item.textEdit.newText:gsub(
+										"from%s+['\"]~/",
+										"from '@/"
+									)
 							end
 							if item.additionalTextEdits then
 								for _, edit in ipairs(item.additionalTextEdits) do
 									if edit.newText then
-										edit.newText = edit.newText:gsub("from%s+['\"]~/", "from '@/")
+										edit.newText = edit.newText:gsub(
+											"from%s+['\"]~/",
+											"from '@/"
+										)
 									end
 								end
 							end
