@@ -4,6 +4,7 @@ return {
 	version = "^3.9.0",
 	main = "ibl",
 	event = "BufReadPre",
+	enabled = false,
 
 	---@module 'ibl'
 	---@type ibl.config

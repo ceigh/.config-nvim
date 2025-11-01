@@ -32,9 +32,9 @@ return {
 			jump = {
 				float = true,
 			},
-			virtual_text = {
-				spacing = 1,
-			},
+			-- virtual_text = {
+			-- 	spacing = 1,
+			-- },
 			severity_sort = true,
 			float = {
 				border = "rounded",
