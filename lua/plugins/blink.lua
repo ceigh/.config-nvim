@@ -37,19 +37,18 @@ return {
 			},
 
 			menu = {
-				min_width = utils.FLOAT_MAX_WIDTH,
-				max_height = 8,
+				max_height = utils.FLOAT_MAX_HEIGHT,
 
 				draw = {
 					columns = {
 						{ "label", "label_description", gap = 1 },
 						{ "kind" },
 					},
-					-- components = {
-					-- 	label = {
-					-- 		width = { max = 32 },
-					-- 	},
-					-- },
+					components = {
+						label = {
+							width = { max = 32 },
+						},
+					},
 				},
 			},
 		},
