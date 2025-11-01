@@ -4,6 +4,7 @@ return {
 	version = "^1.1.2",
 	lazy = false,
 	priority = 1000,
+	enabled = false,
 
 	config = function()
 		require("github-theme").setup({

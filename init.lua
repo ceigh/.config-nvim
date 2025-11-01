@@ -14,12 +14,14 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.listchars = "tab:⇥ ,trail:·"
 vim.o.clipboard = "unnamedplus"
+vim.o.cmdheight = 0
 vim.o.laststatus = 2
+vim.o.statusline = "%f"
 vim.o.winborder = "rounded"
 vim.o.smartindent = true
 vim.o.swapfile = false
 vim.o.number = true
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = "number"
 vim.o.textwidth = 0
 
 -- Disable unused providers

@@ -26,6 +26,7 @@ return {
 				folder_closed = "+",
 				folder_open = "-",
 				folder_empty = "-",
+				use_filtered_colors = false,
 			},
 			modified = { symbol = "" },
 			git_status = {

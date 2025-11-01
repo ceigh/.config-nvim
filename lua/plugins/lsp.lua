@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 ---@type LazySpec
 return {
 	"https://github.com/neovim/nvim-lspconfig",
@@ -30,7 +32,29 @@ return {
 			jump = {
 				float = true,
 			},
+			virtual_text = {
+				spacing = 1,
+			},
+			severity_sort = true,
+			float = {
+				border = "rounded",
+				-- source = "if_many",
+				max_width = utils.FLOAT_MAX_WIDTH,
+				max_height = utils.FLOAT_MAX_HEIGHT,
+			},
 		})
+
+		-- Hover window appearance
+		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+		---@diagnostic disable-next-line: duplicate-set-field
+		function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+			opts = opts or {}
+			opts.max_width = opts.max_width or utils.FLOAT_MAX_WIDTH
+			opts.max_height = opts.max_height or utils.FLOAT_MAX_HEIGHT
+			-- Filter markdown output
+			contents = utils.filter_markdown_content(contents)
+			return orig_util_open_floating_preview(contents, syntax, opts, ...)
+		end
 
 		-------------
 		-- Keymaps --

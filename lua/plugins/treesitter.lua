@@ -30,6 +30,7 @@ return {
 				"lua",
 				"make",
 				"markdown",
+				"markdown_inline",
 				"scss",
 				"typescript",
 				"vim",

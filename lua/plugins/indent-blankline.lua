@@ -9,7 +9,11 @@ return {
 	---@type ibl.config
 	opts = {
 		indent = {
-			char = "▏",
+			char = "⎸",
+		},
+		scope = {
+			show_end = false,
+			show_start = false,
 		},
 	},
 }
