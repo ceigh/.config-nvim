@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 ---@type LazySpec
 return {
 	"https://github.com/lukas-reineke/indent-blankline.nvim",
@@ -10,7 +12,7 @@ return {
 	---@type ibl.config
 	opts = {
 		indent = {
-			char = "⎸",
+			char = utils.VERTICAL_BAR_CHAR,
 		},
 		scope = {
 			show_end = false,

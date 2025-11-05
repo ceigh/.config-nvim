@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 ---@type LazySpec
 return {
 	"https://github.com/lukas-reineke/virt-column.nvim",
@@ -7,6 +9,6 @@ return {
 	---@module 'virt-column'
 	---@type virtcolumn.config
 	opts = {
-		char = "⎸",
+		char = utils.VERTICAL_BAR_CHAR,
 	},
 }

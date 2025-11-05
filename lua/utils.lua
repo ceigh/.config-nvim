@@ -1,5 +1,7 @@
 local M = {}
 
+M.VERTICAL_BAR_CHAR = "│"
+
 M.FLOAT_MAX_WIDTH = 64
 M.FLOAT_MAX_HEIGHT = 32
 
