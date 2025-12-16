@@ -1,7 +1,6 @@
 ---@type LazySpec
 return {
-	"https://github.com/akinsho/git-conflict.nvim",
-	version = "^2.1.0",
-	-- event = "BufReadPre",
+	"https://github.com/tronikelis/conflict-marker.nvim",
+	event = "BufReadPre",
 	config = true,
 }
