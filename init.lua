@@ -46,9 +46,9 @@ vim.keymap.set(
 
 vim.keymap.set("n", "q", "<Nop>")
 
----------------------------------------------------
--- Misspelled :quit command without Shift releasing
----------------------------------------------------
+------------------------------------------------------
+-- Misspelled :quit command without Shift releasing --
+------------------------------------------------------
 
 local quit_commands = {
 	Q = "q",
@@ -65,6 +65,16 @@ local quit_commands = {
 for alias, command in pairs(quit_commands) do
 	vim.api.nvim_create_user_command(alias, command, { bang = true })
 end
+
+---------------
+-- Custom ft --
+---------------
+
+vim.filetype.add({
+	pattern = {
+		[".*nginx.*%.conf%.template"] = "nginx",
+	},
+})
 
 ------------------
 -- Plugins init --
