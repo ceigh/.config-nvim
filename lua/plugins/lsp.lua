@@ -330,6 +330,8 @@ return {
 				"taplo",
 				"prismals",
 				"bashls",
+				"dockerls",
+				"docker_compose_language_service",
 			},
 		})
 
@@ -355,6 +357,8 @@ return {
 			"taplo",
 			"prismals",
 			"bashls",
+			"dockerls",
+			"docker_compose_language_service",
 		})
 
 		------------
