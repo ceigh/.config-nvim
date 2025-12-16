@@ -332,6 +332,7 @@ return {
 				"bashls",
 				"dockerls",
 				"docker_compose_language_service",
+				"nginx_language_server",
 			},
 		})
 
@@ -359,13 +360,28 @@ return {
 			"bashls",
 			"dockerls",
 			"docker_compose_language_service",
+			"nginx_language_server",
 		})
 
 		------------
 		-- Custom --
 		------------
 
-		require("null-ls").setup({
+		local null_ls = require("null-ls")
+
+		null_ls.setup({
+			sources = {
+				-- nginxfmt
+				{
+					method = null_ls.methods.FORMATTING,
+					filetypes = { "nginx" },
+					generator = require("null-ls.helpers").formatter_factory({
+						command = "nginxfmt",
+						args = { "-" },
+						to_stdin = true,
+					}),
+				},
+			},
 			on_attach = function(client, buffer)
 				fmt_on_save(client, buffer)
 			end,
