@@ -38,6 +38,8 @@ return {
 				"yaml",
 				"gleam",
 				"prisma",
+				"dockerfile",
+				"nginx",
 			},
 		})
 	end,
