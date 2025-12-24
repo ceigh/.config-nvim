@@ -322,7 +322,7 @@ return {
 				"unocss",
 				"tailwindcss",
 				"vtsls",
-				"vue_ls@3.0.0",
+				"vue_ls@3.0.8",
 				"graphql",
 				"lua_ls",
 				"jsonls",
@@ -381,7 +381,10 @@ return {
 						to_stdin = true,
 					}),
 				},
+
+				null_ls.builtins.diagnostics.hadolint,
 			},
+
 			on_attach = function(client, buffer)
 				fmt_on_save(client, buffer)
 			end,
