@@ -170,6 +170,7 @@ return {
 				"graphql",
 				"css",
 				"scss",
+				"toml",
 			},
 		})
 
