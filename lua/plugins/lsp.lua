@@ -115,7 +115,7 @@ return {
 				callback = callback or function()
 					if client.supports_method("textDocument/formatting") then
 						vim.lsp.buf.format({
-							timeout_ms = 15000,
+							timeout_ms = 3000,
 						})
 					end
 				end,
