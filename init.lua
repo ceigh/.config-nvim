@@ -22,7 +22,15 @@ vim.o.smartindent = true
 vim.o.swapfile = false
 vim.o.number = true
 vim.o.signcolumn = "number"
+
+-- Disable autowrapping
 vim.o.textwidth = 0
+vim.api.nvim_create_autocmd({ "BufEnter", "BufReadPost" }, {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.textwidth = 0
+	end,
+})
 
 -- Disable unused providers
 vim.g.loaded_node_provider = 0
