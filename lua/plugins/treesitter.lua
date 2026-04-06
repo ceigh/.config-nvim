@@ -2,6 +2,10 @@
 return {
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 	version = "^0.10.0",
+	dependencies = {
+		"https://github.com/isobit/vim-caddyfile",
+		ft = "caddyfile",
+	},
 	branch = "master",
 	build = ":TSUpdate",
 
@@ -40,6 +44,7 @@ return {
 				"prisma",
 				"dockerfile",
 				"nginx",
+				"caddyfile",
 			},
 		})
 	end,

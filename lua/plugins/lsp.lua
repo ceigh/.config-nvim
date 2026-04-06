@@ -383,6 +383,17 @@ return {
 					}),
 				},
 
+				-- caddy
+				{
+					method = null_ls.methods.FORMATTING,
+					filetypes = { "caddyfile" },
+					generator = require("null-ls.helpers").formatter_factory({
+						command = "caddy",
+						args = { "fmt", "-" },
+						to_stdin = true,
+					}),
+				},
+
 				null_ls.builtins.diagnostics.hadolint,
 			},
 
