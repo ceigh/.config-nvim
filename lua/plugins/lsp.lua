@@ -30,7 +30,15 @@ return {
 		vim.diagnostic.config({
 			-- Show float on diagnostic navigation
 			jump = {
-				float = true,
+				on_jump = function(diagnostic, bufnr)
+					if diagnostic then
+						vim.diagnostic.open_float({
+							bufnr = bufnr,
+							scope = "cursor",
+							focus = false,
+						})
+					end
+				end,
 			},
 			-- virtual_text = {
 			-- 	spacing = 1,
@@ -113,7 +121,7 @@ return {
 				buffer = buffer,
 
 				callback = callback or function()
-					if client.supports_method("textDocument/formatting") then
+					if client:supports_method("textDocument/formatting") then
 						vim.lsp.buf.format({
 							timeout_ms = 3000,
 						})
