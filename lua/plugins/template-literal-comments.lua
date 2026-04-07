@@ -4,4 +4,5 @@ return {
 	-- version = "^1.0.0",
 	ft = { "javascript", "typescript", "vue" },
 	config = true,
+	enabled = false,
 }

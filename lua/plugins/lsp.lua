@@ -333,7 +333,7 @@ return {
 				"vtsls",
 				"vue_ls@3.0.8",
 				"graphql",
-				"lua_ls",
+				"lua_ls@3.16.4",
 				"jsonls",
 				"yamlls",
 				"taplo",

@@ -84,6 +84,12 @@ vim.filetype.add({
 	},
 })
 
+vim.filetype.add({
+	filename = {
+		["Caddyfile"] = "caddyfile",
+	},
+})
+
 ------------------
 -- Plugins init --
 ------------------
