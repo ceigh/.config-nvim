@@ -3,7 +3,7 @@ local utils = require("utils")
 ---@type LazySpec
 return {
 	"https://github.com/neovim/nvim-lspconfig",
-	version = "^2.4.0",
+	version = "~2.7.0",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
