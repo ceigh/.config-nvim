@@ -1,7 +1,8 @@
 ---@type LazySpec
 return {
 	"https://github.com/folke/lazydev.nvim",
-	version = "^1.9.0",
+	-- Main branch until https://github.com/folke/lazydev.nvim/commit/ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d released
+	-- version = "^1.9.0",
 	ft = "lua",
 	event = { "BufReadPre", "BufNewFile" },
 
