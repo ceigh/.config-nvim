@@ -49,6 +49,7 @@ return {
 			"prisma",
 			"dockerfile",
 			"nginx",
+			"php",
 		})
 
 		vim.api.nvim_create_autocmd("FileType", {

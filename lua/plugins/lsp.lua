@@ -182,36 +182,6 @@ return {
 			},
 		})
 
-		vim.lsp.config("oxlint", {
-			on_attach = function(client, buffer)
-				-- Getting back missing autofix function after 0.11 migration
-				-- https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/oxlint.lua#L20
-				fmt_on_save(client, buffer, function()
-					-- local client = vim.lsp.get_clients({
-					-- 	bufnr = 0,
-					-- 	name = "oxlint",
-					-- })[1]
-
-					-- if client == nil then
-					-- 	return
-					-- end
-
-					---@diagnostic disable-next-line: param-type-mismatch
-					client.request("workspace/executeCommand", {
-						command = "oxc.fixAll",
-						arguments = { { uri = vim.uri_from_bufnr(0) } },
-						---@diagnostic disable-next-line: param-type-mismatch
-					}, nil, 0)
-				end)
-			end,
-
-			filetypes = {
-				"javascript",
-				"typescript",
-				"vue",
-			},
-		})
-
 		vim.lsp.config("stylelint_lsp", {
 			settings = {
 				stylelintplus = {
@@ -325,6 +295,7 @@ return {
 			ensure_installed = {
 				"eslint",
 				"oxlint",
+				"oxfmt",
 				"stylelint_lsp",
 				"cssls",
 				"css_variables",
@@ -351,7 +322,8 @@ return {
 
 		vim.lsp.enable({
 			"eslint",
-			-- "oxlint",
+			"oxlint",
+			"oxfmt",
 			"stylelint_lsp",
 			"cssls",
 			-- "css_variables",
@@ -402,6 +374,10 @@ return {
 					}),
 				},
 
+				-- pint (php)
+				null_ls.builtins.formatting.pint,
+
+				-- hado (dockerfile)
 				null_ls.builtins.diagnostics.hadolint,
 			},
 
