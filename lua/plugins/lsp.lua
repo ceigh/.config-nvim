@@ -146,6 +146,84 @@ return {
 			end,
 		})
 
+		-- ESLint
+		-- A smart setup for both legacy and modern projects. Flat-config projects
+		-- also format css, html, etc; legacy projects handle only js, ts and vue.
+
+		local legacy_eslint_filetypes = {
+			javascript = true,
+			typescript = true,
+			vue = true,
+		}
+
+		local flat_eslint_filetypes =
+			vim.tbl_extend("force", vim.deepcopy(legacy_eslint_filetypes), {
+				html = true,
+				markdown = true,
+				json = true,
+				jsonc = true,
+				yaml = true,
+				gql = true,
+				graphql = true,
+				css = true,
+				scss = true,
+				toml = true,
+			})
+
+		local legacy_eslint_config_files = {
+			".eslintrc",
+			".eslintrc.js",
+			".eslintrc.cjs",
+			".eslintrc.json",
+			".eslintrc.yaml",
+			".eslintrc.yml",
+		}
+
+		local flat_eslint_config_files = {
+			"eslint.config.js",
+			"eslint.config.mjs",
+			"eslint.config.cjs",
+			"eslint.config.ts",
+			"eslint.config.mts",
+			"eslint.config.cts",
+		}
+
+		local eslint_config_files = vim.list_extend(
+			vim.deepcopy(flat_eslint_config_files),
+			legacy_eslint_config_files
+		)
+
+		local function get_eslint_root(bufnr)
+			local filename = vim.api.nvim_buf_get_name(bufnr)
+
+			if filename == "" then
+				return nil
+			end
+
+			local found = vim.fs.find(eslint_config_files, {
+				path = filename,
+				upward = true,
+				type = "file",
+				limit = 1,
+			})
+
+			if not found[1] then
+				return nil
+			end
+
+			return vim.fs.dirname(found[1])
+		end
+
+		local function has_flat_eslint_config(root)
+			for _, filename in ipairs(flat_eslint_config_files) do
+				if vim.uv.fs_stat(root .. "/" .. filename) then
+					return true
+				end
+			end
+
+			return false
+		end
+
 		-- Provides LspEslintFixAll
 		local eslint_on_attach = vim.lsp.config.eslint.on_attach
 
@@ -164,22 +242,29 @@ return {
 				end)
 			end,
 
-			filetypes = {
-				"javascript",
-				"typescript",
-				"vue",
+			filetypes = vim.tbl_keys(flat_eslint_filetypes),
 
-				"html",
-				"markdown",
-				"json",
-				"jsonc",
-				"yaml",
-				"gql",
-				"graphql",
-				"css",
-				"scss",
-				"toml",
-			},
+			root_dir = function(bufnr, on_dir)
+				local root = get_eslint_root(bufnr)
+				if not root then
+					return
+				end
+
+				local filetype = vim.bo[bufnr].filetype
+
+				-- Flat eslint
+				if has_flat_eslint_config(root) then
+					if flat_eslint_filetypes[filetype] then
+						on_dir(root)
+					end
+					return
+				end
+
+				-- Legacy eslint
+				if legacy_eslint_filetypes[filetype] then
+					on_dir(root)
+				end
+			end,
 		})
 
 		-- Old lsp server https://github.com/bmatcuk/stylelint-lsp for old projects
