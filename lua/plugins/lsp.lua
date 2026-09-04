@@ -3,7 +3,7 @@ local utils = require("utils")
 ---@type LazySpec
 return {
 	"https://github.com/neovim/nvim-lspconfig",
-	version = "~2.7.0",
+	version = "^2.7.0",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		{
@@ -182,7 +182,28 @@ return {
 			},
 		})
 
-		vim.lsp.config("stylelint_lsp", {
+		-- Old lsp server https://github.com/bmatcuk/stylelint-lsp for old projects
+		vim.lsp.config("stylelint_lsp_legacy", {
+			cmd = { "stylelint-lsp", "--stdio" },
+			filetypes = {
+				"css",
+				"scss",
+				"vue",
+			},
+			root_markers = {
+				".stylelintrc",
+				".stylelintrc.json",
+				".stylelintrc.yaml",
+				".stylelintrc.yml",
+				".stylelintrc.js",
+				".stylelintrc.cjs",
+				".stylelintrc.mjs",
+				"stylelint.config.js",
+				"stylelint.config.cjs",
+				"stylelint.config.mjs",
+				"package.json",
+			},
+
 			settings = {
 				stylelintplus = {
 					autoFixOnFormat = true,
@@ -296,7 +317,6 @@ return {
 				"eslint",
 				"oxlint",
 				"oxfmt",
-				"stylelint_lsp",
 				"cssls",
 				"css_variables",
 				"unocss",
@@ -324,7 +344,7 @@ return {
 			"eslint",
 			"oxlint",
 			"oxfmt",
-			"stylelint_lsp",
+			"stylelint_lsp_legacy",
 			"cssls",
 			-- "css_variables",
 			-- "unocss",
