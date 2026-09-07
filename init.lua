@@ -44,15 +44,15 @@ vim.g.loaded_ruby_provider = 0
 
 vim.g.mapleader = ","
 
-vim.keymap.set("n", ";", ":nohlsearch<CR>")
-vim.keymap.set("n", "<leader>l", ":Lazy<CR>")
+vim.keymap.set("n", ";", ":nohlsearch<CR>", { silent = true })
+vim.keymap.set("n", "<leader>l", ":Lazy<CR>", { silent = true })
 vim.keymap.set(
 	"v",
 	"<leader>t",
-	":'<,'>!typograf --stdin --html-entity-type name --html-entity-only-invisible --no-color<CR>"
+	":<C-u>lua require('utils').typograf_selection()<CR>",
+	{ silent = true }
 )
-
-vim.keymap.set("n", "q", "<Nop>")
+vim.keymap.set("n", "q", "<Nop>", { silent = true })
 
 ------------------------------------------------------
 -- Misspelled :quit command without Shift releasing --
