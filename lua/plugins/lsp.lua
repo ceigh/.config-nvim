@@ -390,6 +390,10 @@ return {
 			end,
 		})
 
+		-- Run only in projects with oxlint/oxfmt config
+		vim.lsp.config("oxlint", { workspace_required = true })
+		vim.lsp.config("oxfmt", { workspace_required = true })
+
 		----------------------
 		-- Install binaries --
 		----------------------
