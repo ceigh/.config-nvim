@@ -390,9 +390,32 @@ return {
 			end,
 		})
 
-		-- Run only in projects with oxlint/oxfmt config
-		vim.lsp.config("oxlint", { workspace_required = true })
-		vim.lsp.config("oxfmt", { workspace_required = true })
+		-- Provides LspOxlintFixAll
+		local oxlint_on_attach = vim.lsp.config.oxlint.on_attach
+
+		vim.lsp.config("oxlint", {
+			-- Run only in projects with oxlint/oxfmt config
+			workspace_required = true,
+
+			on_attach = function(client, buffer)
+				disable_builtin_fmt(client)
+
+				if not oxlint_on_attach then
+					return
+				end
+
+				oxlint_on_attach(client, buffer)
+
+				fmt_on_save(client, buffer, function()
+					vim.cmd("silent! LspOxlintFixAll")
+				end)
+			end,
+		})
+
+		vim.lsp.config("oxfmt", {
+			-- Run only in projects with oxlint/oxfmt config
+			workspace_required = true,
+		})
 
 		----------------------
 		-- Install binaries --
