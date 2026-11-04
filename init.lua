@@ -74,6 +74,12 @@ for alias, command in pairs(quit_commands) do
 	vim.api.nvim_create_user_command(alias, command, { bang = true })
 end
 
+-------------------------------------
+-- :LspInfo removed from lspconfig --
+-------------------------------------
+
+vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {})
+
 ---------------
 -- Custom ft --
 ---------------
