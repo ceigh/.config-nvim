@@ -116,6 +116,8 @@ return {
 		-- Helpers --
 		-------------
 
+		local FMT_TIMEMOUT_MS = 3000
+
 		local function fmt_on_save(client, buffer, callback)
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				buffer = buffer,
@@ -123,7 +125,7 @@ return {
 				callback = callback or function()
 					if client:supports_method("textDocument/formatting") then
 						vim.lsp.buf.format({
-							timeout_ms = 3000,
+							timeout_ms = FMT_TIMEMOUT_MS,
 						})
 					end
 				end,
@@ -390,6 +392,43 @@ return {
 			end,
 		})
 
+		-- Oxlint + oxfmt
+		-- One hook for both to avoid races
+
+		local function oxc_fmt_on_save(_, buffer)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = vim.api.nvim_create_augroup("oxc_save_" .. buffer, {}),
+				buffer = buffer,
+
+				callback = function()
+					local oxlint = vim.lsp.get_clients({
+						bufnr = buffer,
+						name = "oxlint",
+					})[1]
+
+					if oxlint then
+						oxlint:request_sync("workspace/executeCommand", {
+							command = "oxc.fixAll",
+							arguments = { { uri = vim.uri_from_bufnr(buffer) } },
+						}, FMT_TIMEMOUT_MS, buffer)
+					end
+
+					local oxfmt = vim.lsp.get_clients({
+						bufnr = buffer,
+						name = "oxfmt",
+					})[1]
+
+					if oxfmt then
+						vim.lsp.buf.format({
+							bufnr = buffer,
+							id = oxfmt.id,
+							timeout_ms = FMT_TIMEMOUT_MS,
+						})
+					end
+				end,
+			})
+		end
+
 		-- Provides LspOxlintFixAll
 		local oxlint_on_attach = vim.lsp.config.oxlint.on_attach
 
@@ -400,21 +439,19 @@ return {
 			on_attach = function(client, buffer)
 				disable_builtin_fmt(client)
 
-				if not oxlint_on_attach then
-					return
+				if oxlint_on_attach then
+					oxlint_on_attach(client, buffer)
 				end
 
-				oxlint_on_attach(client, buffer)
-
-				fmt_on_save(client, buffer, function()
-					vim.cmd("silent! LspOxlintFixAll")
-				end)
+				oxc_fmt_on_save(client, buffer)
 			end,
 		})
 
 		vim.lsp.config("oxfmt", {
 			-- Run only in projects with oxlint/oxfmt config
 			workspace_required = true,
+
+			on_attach = oxc_fmt_on_save,
 		})
 
 		----------------------
