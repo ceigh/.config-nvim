@@ -137,6 +137,32 @@ return {
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
 
+		---Read package.json of the nearest node_modules/<name> above buffer
+		---@param buffer integer
+		---@param name string
+		---@return table|nil
+		local function find_package(buffer, name)
+			local file = vim.api.nvim_buf_get_name(buffer)
+			local dir = file ~= "" and vim.fs.dirname(file) or vim.fn.getcwd()
+
+			while dir do
+				local path =
+					vim.fs.joinpath(dir, "node_modules", name, "package.json")
+
+				if vim.uv.fs_stat(path) then
+					local ok, pkg = pcall(
+						vim.json.decode,
+						table.concat(vim.fn.readfile(path), "\n")
+					)
+
+					return ok and pkg or {}
+				end
+
+				local parent = vim.fs.dirname(dir)
+				dir = parent ~= dir and parent or nil
+			end
+		end
+
 		--------------------
 		-- Configurations --
 		--------------------
@@ -317,11 +343,50 @@ return {
 			},
 		})
 
+		-- Vue projects use combined Typescript setup via vtsls
+		-- Other Typescript projects use simple tsc (for ts7+ support)
+
+		---@param buffer integer
+		---@return boolean
+		local function use_tsc(buffer)
+			if find_package(buffer, "vue") then
+				return false
+			end
+
+			local typescript = find_package(buffer, "typescript")
+			local version = typescript
+				and vim.version.parse(typescript.version or "")
+
+			return version ~= nil and version.major >= 7
+		end
+
+		local tsc_root_dir = vim.lsp.config.tsc.root_dir
+
+		vim.lsp.config("tsc", {
+			on_attach = function(client)
+				disable_builtin_fmt(client)
+			end,
+
+			root_dir = function(buffer, on_dir)
+				if use_tsc(buffer) then
+					tsc_root_dir(buffer, on_dir)
+				end
+			end,
+		})
+
 		-- https://github.com/vuejs/language-tools/wiki/Neovim
+
+		local vtsls_root_dir = vim.lsp.config.vtsls.root_dir
 
 		vim.lsp.config("vtsls", {
 			on_attach = function(client)
 				disable_builtin_fmt(client)
+			end,
+
+			root_dir = function(buffer, on_dir)
+				if not use_tsc(buffer) then
+					vtsls_root_dir(buffer, on_dir)
+				end
 			end,
 
 			settings = {
@@ -500,6 +565,7 @@ return {
 			-- "tailwindcss",
 			"graphql",
 			"lua_ls",
+			"tsc",
 			"vtsls",
 			"vue_ls",
 			"stylua3p_ls",
