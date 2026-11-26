@@ -42,6 +42,7 @@ return {
 			"markdown_inline",
 			"scss",
 			"typescript",
+			"tsx",
 			"vim",
 			"vue",
 			"yaml",
